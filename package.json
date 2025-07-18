@@ -1,0 +1,45 @@
+{
+  "name": "js-webdev-monorepo",
+  "version": "1.0.0",
+  "description": "A perfect JavaScript monorepo for web development learning and experimentation",
+  "author": {
+    "name": "dunamismax",
+    "email": "dunamismax@tutamail.com",
+    "url": "https://github.com/dunamismax/js-webdev"
+  },
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "start": "npm run start --workspaces",
+    "clean": "rm -rf dist build node_modules/.cache",
+    "weather:dev": "npm run dev -w apps/weather",
+    "weather:build": "npm run build -w apps/weather",
+    "weather:start": "npm run start -w apps/weather",
+    "todo:dev": "npm run dev -w apps/todo-list",
+    "todo:build": "npm run build -w apps/todo-list",
+    "todo:start": "npm run start -w apps/todo-list",
+    "server:dev": "npm run dev -w packages/server",
+    "server:start": "npm run start -w packages/server"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.8",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

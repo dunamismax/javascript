@@ -1,0 +1,13 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Dark theme weather app using OpenWeatherMap API",
+  "scripts": {
+    "dev": "concurrently \"node build.js --watch\" \"npx http-server dist -p 3000 -c-1\"",
+    "build": "node build.js",
+    "start": "npx http-server dist -p 3000 -s"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
