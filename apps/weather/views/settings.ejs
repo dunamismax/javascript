@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Settings</h1>
+            <nav class="navigation">
+                <a href="/">Dashboard</a>
+                <a href="/about">About</a>
+                <a href="/settings" class="active">Settings</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="settings-content">
+                <section class="settings-section">
+                    <h2>Temperature Units</h2>
+                    <div class="setting-item">
+                        <label>
+                            <input type="radio" name="temperature" value="celsius" checked>
+                            Celsius (°C)
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="radio" name="temperature" value="fahrenheit">
+                            Fahrenheit (°F)
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="radio" name="temperature" value="kelvin">
+                            Kelvin (K)
+                        </label>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>Default Location</h2>
+                    <div class="setting-item">
+                        <label for="defaultCity">Default City:</label>
+                        <input type="text" id="defaultCity" placeholder="Enter city name...">
+                        <button type="button" id="saveLocation">Save</button>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>Auto-refresh</h2>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="autoRefresh">
+                            Enable auto-refresh every 5 minutes
+                        </label>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>FlareJS Router</h2>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="prefetchEnabled" checked>
+                            Enable link prefetching for faster navigation
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="prefetchMode">Prefetch Mode:</label>
+                        <select id="prefetchMode">
+                            <option value="visible">Visible links</option>
+                            <option value="hover">On hover</option>
+                            <option value="none">Disabled</option>
+                        </select>
+                    </div>
+                </section>
+
+                <div class="settings-actions">
+                    <button type="button" id="saveSettings" class="primary-btn">Save Settings</button>
+                    <button type="button" id="resetSettings" class="secondary-btn">Reset to Defaults</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import flare from '/js/flare-router.js';
+        const router = flare({ prefetch: 'visible', log: true });
+        
+        // Settings functionality
+        document.getElementById('saveSettings')?.addEventListener('click', () => {
+            const settings = {
+                temperature: document.querySelector('input[name="temperature"]:checked')?.value,
+                defaultCity: document.getElementById('defaultCity')?.value,
+                autoRefresh: document.getElementById('autoRefresh')?.checked,
+                prefetchEnabled: document.getElementById('prefetchEnabled')?.checked,
+                prefetchMode: document.getElementById('prefetchMode')?.value
+            };
+            localStorage.setItem('weatherSettings', JSON.stringify(settings));
+            alert('Settings saved successfully!');
+        });
+
+        document.getElementById('resetSettings')?.addEventListener('click', () => {
+            localStorage.removeItem('weatherSettings');
+            location.reload();
+        });
+
+        // Load saved settings
+        const savedSettings = JSON.parse(localStorage.getItem('weatherSettings') || '{}');
+        if (savedSettings.temperature) {
+            document.querySelector(`input[value="${savedSettings.temperature}"]`).checked = true;
+        }
+        if (savedSettings.defaultCity) {
+            document.getElementById('defaultCity').value = savedSettings.defaultCity;
+        }
+        if (savedSettings.autoRefresh !== undefined) {
+            document.getElementById('autoRefresh').checked = savedSettings.autoRefresh;
+        }
+        if (savedSettings.prefetchEnabled !== undefined) {
+            document.getElementById('prefetchEnabled').checked = savedSettings.prefetchEnabled;
+        }
+        if (savedSettings.prefetchMode) {
+            document.getElementById('prefetchMode').value = savedSettings.prefetchMode;
+        }
+    </script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

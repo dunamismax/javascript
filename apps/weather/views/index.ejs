@@ -10,6 +10,11 @@
     <div class="container">
         <header class="header">
             <h1>Weather Dashboard</h1>
+            <nav class="navigation">
+                <a href="/" class="active">Dashboard</a>
+                <a href="/about">About</a>
+                <a href="/settings">Settings</a>
+            </nav>
             <div class="search-container">
                 <input type="text" id="cityInput" placeholder="Enter city name..." />
                 <button id="searchBtn">Search</button>
@@ -69,6 +74,10 @@
         </main>
     </div>
 
+    <script type="module">
+        import flare from '/js/flare-router.js';
+        const router = flare({ prefetch: 'visible', log: true });
+    </script>
     <script src="/js/main.js"></script>
 </body>
 </html>

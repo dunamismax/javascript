@@ -33,7 +33,7 @@ apps.forEach(app => {
   const envPath = path.join('apps', app, '.env.example');
   if (!existsSync(envPath)) {
     let envContent = '';
-    
+
     if (app === 'weather') {
       envContent = `# Weather App Configuration
 NODE_ENV=development
@@ -45,7 +45,7 @@ NODE_ENV=development
 PORT=3001
 DATABASE_PATH=./database/todos.db`;
     }
-    
+
     writeFileSync(envPath, envContent);
     console.log(`✅ Created ${envPath}`);
   }

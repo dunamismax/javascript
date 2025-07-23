@@ -12,7 +12,8 @@
     "express": "^4.18.2",
     "ejs": "^3.1.9",
     "dotenv": "^16.4.5",
-    "@dunamismax/utils": "*"
+    "@dunamismax/utils": "*",
+    "@dunamismax/flare-router": "*"
   },
   "engines": {
     "node": ">=18.0.0"

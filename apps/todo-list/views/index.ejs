@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
         <header class="header">
             <h1>Task Manager</h1>
+            <nav class="navigation">
+                <a href="/" class="active">Tasks</a>
+                <a href="/analytics">Analytics</a>
+                <a href="/about">About</a>
+            </nav>
             <div class="stats" id="stats">
                 <div class="stat-item">
                     <span class="stat-number" id="totalTodos">0</span>
@@ -96,6 +101,10 @@
         </main>
     </div>
 
-    <script src="main.js"></script>
+    <script type="module">
+        import flare from '/js/flare-router.js';
+        const router = flare({ prefetch: 'visible', log: true });
+    </script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

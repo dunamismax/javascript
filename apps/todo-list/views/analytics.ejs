@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Analytics Dashboard</h1>
+            <nav class="navigation">
+                <a href="/">Tasks</a>
+                <a href="/analytics" class="active">Analytics</a>
+                <a href="/about">About</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="analytics-content">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Task Statistics</h3>
+                        <div id="taskStats" class="stats-display">
+                            <div class="stat-row">
+                                <span>Total Tasks:</span>
+                                <span id="totalTasksCount">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Completed:</span>
+                                <span id="completedTasksCount">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Pending:</span>
+                                <span id="pendingTasksCount">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Completion Rate:</span>
+                                <span id="completionRate">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>Priority Breakdown</h3>
+                        <div id="priorityBreakdown" class="breakdown-display">
+                            <div class="priority-item">
+                                <span class="priority-label high">High Priority:</span>
+                                <span id="highPriorityCount">0</span>
+                            </div>
+                            <div class="priority-item">
+                                <span class="priority-label medium">Medium Priority:</span>
+                                <span id="mediumPriorityCount">0</span>
+                            </div>
+                            <div class="priority-item">
+                                <span class="priority-label low">Low Priority:</span>
+                                <span id="lowPriorityCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>Category Distribution</h3>
+                        <div id="categoryBreakdown" class="breakdown-display">
+                            <div class="category-item">
+                                <span class="category-label">General:</span>
+                                <span id="generalCount">0</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-label">Work:</span>
+                                <span id="workCount">0</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-label">Personal:</span>
+                                <span id="personalCount">0</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-label">Shopping:</span>
+                                <span id="shoppingCount">0</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-label">Health:</span>
+                                <span id="healthCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card full-width">
+                        <h3>Recent Activity</h3>
+                        <div id="recentActivity" class="activity-display">
+                            <p>Loading recent activity...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="refresh-section">
+                    <button id="refreshAnalytics" class="primary-btn">Refresh Data</button>
+                    <span class="last-updated">Last updated: <span id="lastUpdated">--</span></span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import flare from '/js/flare-router.js';
+        const router = flare({ prefetch: 'visible', log: true });
+
+        // Analytics functionality
+        async function loadAnalytics() {
+            try {
+                const response = await fetch('/api/stats');
+                const stats = await response.json();
+                
+                // Update basic stats
+                document.getElementById('totalTasksCount').textContent = stats.total || 0;
+                document.getElementById('completedTasksCount').textContent = stats.completed || 0;
+                document.getElementById('pendingTasksCount').textContent = stats.pending || 0;
+                
+                const completionRate = stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
+                document.getElementById('completionRate').textContent = completionRate + '%';
+                
+                // Update priority breakdown
+                if (stats.byPriority) {
+                    const priorityCounts = { high: 0, medium: 0, low: 0 };
+                    stats.byPriority.forEach(item => {
+                        priorityCounts[item.priority] = item.count;
+                    });
+                    document.getElementById('highPriorityCount').textContent = priorityCounts.high;
+                    document.getElementById('mediumPriorityCount').textContent = priorityCounts.medium;
+                    document.getElementById('lowPriorityCount').textContent = priorityCounts.low;
+                }
+                
+                // Update category breakdown
+                if (stats.byCategory) {
+                    const categoryCounts = { general: 0, work: 0, personal: 0, shopping: 0, health: 0 };
+                    stats.byCategory.forEach(item => {
+                        categoryCounts[item.category] = item.count;
+                    });
+                    document.getElementById('generalCount').textContent = categoryCounts.general;
+                    document.getElementById('workCount').textContent = categoryCounts.work;
+                    document.getElementById('personalCount').textContent = categoryCounts.personal;
+                    document.getElementById('shoppingCount').textContent = categoryCounts.shopping;
+                    document.getElementById('healthCount').textContent = categoryCounts.health;
+                }
+                
+                document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+            } catch (error) {
+                console.error('Failed to load analytics:', error);
+            }
+        }
+
+        // Load recent todos for activity
+        async function loadRecentActivity() {
+            try {
+                const response = await fetch('/api/todos?limit=5');
+                const todos = await response.json();
+                
+                const activityContainer = document.getElementById('recentActivity');
+                if (todos.length === 0) {
+                    activityContainer.innerHTML = '<p>No recent activity</p>';
+                    return;
+                }
+                
+                const activityHTML = todos.slice(0, 5).map(todo => `
+                    <div class="activity-item">
+                        <span class="activity-text">${todo.text}</span>
+                        <span class="activity-meta">${todo.category} • ${todo.priority} • ${new Date(todo.created_at).toLocaleDateString()}</span>
+                    </div>
+                `).join('');
+                
+                activityContainer.innerHTML = activityHTML;
+            } catch (error) {
+                console.error('Failed to load recent activity:', error);
+                document.getElementById('recentActivity').innerHTML = '<p>Failed to load recent activity</p>';
+            }
+        }
+
+        // Load data on page load
+        loadAnalytics();
+        loadRecentActivity();
+
+        // Refresh button
+        document.getElementById('refreshAnalytics').addEventListener('click', () => {
+            loadAnalytics();
+            loadRecentActivity();
+        });
+    </script>
+</body>
+</html>

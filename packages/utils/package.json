@@ -9,7 +9,13 @@
     "./dom": "./dom.js",
     "./storage": "./storage.js"
   },
-  "keywords": ["utilities", "javascript", "dom", "api", "storage"],
+  "keywords": [
+    "utilities",
+    "javascript",
+    "dom",
+    "api",
+    "storage"
+  ],
   "author": {
     "name": "dunamismax",
     "email": "dunamismax@tutamail.com"

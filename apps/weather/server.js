@@ -18,27 +18,41 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.render('index', {
-    title: 'Weather Dashboard'
+    title: 'Weather Dashboard',
+  });
+});
+
+app.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About - Weather Dashboard',
+  });
+});
+
+app.get('/settings', (req, res) => {
+  res.render('settings', {
+    title: 'Settings - Weather Dashboard',
   });
 });
 
 app.get('/api/weather/:city', async (req, res) => {
   const { city } = req.params;
   const apiKey = process.env.OPENWEATHERMAP_API_KEY;
-  
+
   if (!apiKey) {
-    return res.status(500).json({ error: 'OpenWeatherMap API key not configured' });
+    return res
+      .status(500)
+      .json({ error: 'OpenWeatherMap API key not configured' });
   }
 
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     );
-    
+
     if (!response.ok) {
       throw new Error('Weather data not found');
     }
-    
+
     const data = await response.json();
     res.json(data);
   } catch (error) {

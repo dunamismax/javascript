@@ -13,7 +13,8 @@
     "ejs": "^3.1.9",
     "sqlite3": "^5.1.6",
     "cors": "^2.8.5",
-    "@dunamismax/utils": "*"
+    "@dunamismax/utils": "*",
+    "@dunamismax/flare-router": "*"
   },
   "engines": {
     "node": ">=18.0.0"

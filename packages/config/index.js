@@ -9,5 +9,5 @@ export { default as nodeConfig } from './node.config.js';
 export const configs = {
   eslint: './eslint.config.js',
   prettier: './prettier.config.js',
-  node: './node.config.js'
+  node: './node.config.js',
 };

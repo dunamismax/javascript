@@ -3,12 +3,12 @@ export default {
   env: {
     browser: true,
     es2022: true,
-    node: true
+    node: true,
   },
   extends: ['eslint:recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   rules: {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
@@ -19,7 +19,7 @@ export default {
     'arrow-spacing': 'error',
     'no-duplicate-imports': 'error',
     'object-shorthand': 'error',
-    'prefer-template': 'error'
+    'prefer-template': 'error',
   },
-  ignorePatterns: ['node_modules/', 'dist/', 'build/']
+  ignorePatterns: ['node_modules/', 'dist/', 'build/'],
 };

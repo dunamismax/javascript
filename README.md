@@ -47,6 +47,7 @@ A production-ready JavaScript monorepo featuring vanilla JavaScript, Node.js, an
 ├── packages/
 │   ├── utils/                 # API client, DOM helpers, storage utilities
 │   ├── ui-components/         # CSS design system with dark/light themes
+│   ├── FlareJS/               # 2kB router for SPA-like navigation
 │   └── config/                # Shared ESLint, Prettier, Node.js configs
 ├── scripts/setup.js           # Automated environment setup
 └── Configuration files        # ESLint, Prettier, package.json
@@ -85,7 +86,7 @@ npm run dev
 ## Tech Stack
 
 **Core:** Node.js 18+, Vanilla JavaScript ES Modules, Express.js, SQLite
-**Frontend:** EJS templates, CSS design system, shared DOM utilities
+**Frontend:** EJS templates, CSS design system, FlareJS router, shared DOM utilities
 **Shared:** API client, storage utilities, configuration packages
 **Tools:** ESLint, Prettier, npm workspaces, environment management
 **Deployment:** Linux, systemd, Caddy reverse proxy
@@ -100,9 +101,10 @@ npm run dev
 
 - **`@dunamismax/utils`** - API client, DOM helpers, storage utilities, performance tools
 - **`@dunamismax/ui-components`** - CSS design system with dark/light themes
+- **`@dunamismax/flare-router`** - Lightning-fast 2kB router for SPA-like navigation
 - **`@dunamismax/config`** - Shared ESLint, Prettier, and Node.js configurations
-- **Weather App** - OpenWeatherMap integration with server-side API proxy
-- **Todo App** - Full CRUD operations with SQLite database and REST API
+- **Weather App** - OpenWeatherMap integration with server-side API proxy and multi-page navigation
+- **Todo App** - Full CRUD operations with SQLite database, REST API, and analytics dashboard
 
 ## Development Scripts
 
@@ -118,6 +120,7 @@ npm run format        # Format code with Prettier
 npm run format:check  # Check code formatting
 
 # Production
+npm run build         # Build all packages
 npm run start         # Start all applications in production mode
 ```
 
@@ -126,6 +129,7 @@ npm run start         # Start all applications in production mode
 **Shared API Client:** Centralized HTTP client with error handling and JSON support
 **DOM Utilities:** jQuery-style selectors and DOM manipulation helpers
 **CSS Design System:** Comprehensive theme with dark/light mode support
+**FlareJS Router:** 2kB router for lightning-fast SPA-like navigation with prefetching
 **Security:** Server-side API key management and HTML escaping
 **Database:** SQLite integration with full CRUD operations
 **Development:** Hot reload, code formatting, and quality checks
@@ -146,6 +150,7 @@ PORT=3000
 **Quick Deploy:**
 
 ```bash
+npm run build  # Build all packages
 npm run start  # Production mode
 ```
 
@@ -167,6 +172,20 @@ const todos = await api.get('/todos');
 import { $, escapeHtml } from '@dunamismax/utils/dom.js';
 const element = $('#myElement');
 element.innerHTML = escapeHtml(userInput);
+```
+
+**FlareJS Router:**
+
+```javascript
+import flare from '@dunamismax/flare-router';
+const router = flare({ prefetch: 'visible', log: true });
+
+// Navigate programmatically
+router.go('/about');
+
+// Listen to router events
+window.addEventListener('flare:router:fetch', showLoader);
+window.addEventListener('flare:router:end', hideLoader);
 ```
 
 **CSS Design System:**

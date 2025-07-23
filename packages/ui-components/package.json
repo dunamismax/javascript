@@ -7,7 +7,12 @@
   "exports": {
     "./styles/*": "./styles/*"
   },
-  "keywords": ["ui", "components", "css", "styles"],
+  "keywords": [
+    "ui",
+    "components",
+    "css",
+    "styles"
+  ],
   "author": {
     "name": "dunamismax",
     "email": "dunamismax@tutamail.com"
