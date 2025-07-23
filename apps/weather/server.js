@@ -18,8 +18,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.render('index', {
-    title: 'Weather Dashboard',
-    apiKey: process.env.OPENWEATHERMAP_API_KEY || ''
+    title: 'Weather Dashboard'
   });
 });
 

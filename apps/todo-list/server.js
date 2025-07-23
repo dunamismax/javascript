@@ -1,13 +1,17 @@
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const cors = require('cors');
-const path = require('path');
+import express from 'express';
+import sqlite3 from 'sqlite3';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 // Database setup
-const dbPath = path.join(__dirname, '../../database/todos.db');
+const dbPath = path.join(__dirname, 'database', 'todos.db');
 const db = new sqlite3.Database(dbPath);
 
 // Middleware

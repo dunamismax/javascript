@@ -1,34 +1,30 @@
+import { ApiClient } from '@dunamismax/utils/api.js';
+import { $, $$, createElement } from '@dunamismax/utils/dom.js';
+
 class WeatherApp {
     constructor() {
-        this.apiKey = this.getApiKey();
-        this.baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
+        this.api = new ApiClient('/api');
         this.iconBaseUrl = 'https://openweathermap.org/img/wn/';
         
         this.elements = {
-            cityInput: document.getElementById('cityInput'),
-            searchBtn: document.getElementById('searchBtn'),
-            weatherCard: document.getElementById('weatherCard'),
-            errorMessage: document.getElementById('errorMessage'),
-            loadingSpinner: document.getElementById('loadingSpinner'),
-            cityName: document.getElementById('cityName'),
-            country: document.getElementById('country'),
-            temp: document.getElementById('temp'),
-            description: document.getElementById('description'),
-            feelsLike: document.getElementById('feelsLike'),
-            humidity: document.getElementById('humidity'),
-            windSpeed: document.getElementById('windSpeed'),
-            pressure: document.getElementById('pressure'),
-            visibility: document.getElementById('visibility'),
-            weatherIcon: document.getElementById('weatherIcon')
+            cityInput: $('#cityInput'),
+            searchBtn: $('#searchBtn'),
+            weatherCard: $('#weatherCard'),
+            errorMessage: $('#errorMessage'),
+            loadingSpinner: $('#loadingSpinner'),
+            cityName: $('#cityName'),
+            country: $('#country'),
+            temp: $('#temp'),
+            description: $('#description'),
+            feelsLike: $('#feelsLike'),
+            humidity: $('#humidity'),
+            windSpeed: $('#windSpeed'),
+            pressure: $('#pressure'),
+            visibility: $('#visibility'),
+            weatherIcon: $('#weatherIcon')
         };
         
         this.init();
-    }
-    
-    getApiKey() {
-        // In a real app, this would come from environment variables
-        // For demo purposes, we'll use a placeholder
-        return 'YOUR_OPENWEATHERMAP_API_KEY';
     }
     
     init() {
@@ -60,25 +56,7 @@ class WeatherApp {
     }
     
     async fetchWeatherData(city) {
-        if (this.apiKey === 'YOUR_OPENWEATHERMAP_API_KEY') {
-            // Return demo data if no API key is set
-            return this.getDemoData(city);
-        }
-        
-        const url = `${this.baseUrl}?q=${encodeURIComponent(city)}&appid=${this.apiKey}&units=metric`;
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error('City not found');
-            } else if (response.status === 401) {
-                throw new Error('Invalid API key');
-            } else {
-                throw new Error('Weather data unavailable');
-            }
-        }
-        
-        return await response.json();
+        return await this.api.get(`/weather/${encodeURIComponent(city)}`);
     }
     
     getDemoData(city) {

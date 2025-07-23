@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/dunamismax/javascript">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Modern+JavaScript+Development+Stack;Vanilla+JS+%2B+Node.js+Runtime;Express.js+%2B+EJS+Templates;Plain+CSS+%2B+DOM+Manipulation;File+System+%2B+Environment+Config;npm+Workspaces+%2B+Monorepo;ESLint+%2B+Prettier+Quality;Linux+%2B+Caddy+Deployment;Minimal+Dependencies+%2B+Maximum+Control;4-Step+Development+Setup;Zero+Framework+Overhead;Production-Ready+Structure;Hot+Module+Replacement;TypeScript+Optional+JSDoc;Database+Integration+Ready" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Modern+JavaScript+Development+Monorepo;Vanilla+JS+%2B+Node.js+%2B+Express.js;Shared+Utilities+%2B+API+Client;EJS+Templates+%2B+Server-Side+Rendering;SQLite+Database+%2B+REST+APIs;CSS+Design+System+%2B+Dark+Theme;npm+Workspaces+%2B+ES+Modules;ESLint+%2B+Prettier+%2B+Code+Quality;Weather+Dashboard+%2B+Todo+Manager;Secure+API+Key+Management;Production+Deployment+Ready;Zero+Framework+Overhead;Maximum+Performance+Control;TypeScript+Optional+JSDoc;Linux+%2B+systemd+%2B+Caddy;4-Step+Development+Setup;Real-World+Application+Examples;Monorepo+Package+Architecture;File+System+%2B+Environment+Config;GitHub+Actions+CI%2FCD+Pipeline;MIT+Licensed+Open+Source" alt="Typing SVG" />
   </a>
 </p>
 
@@ -27,36 +27,29 @@
 
 # JavaScript Development Monorepo
 
-A modern JavaScript development environment featuring vanilla JavaScript, Node.js, Express.js, and EJS. This monorepo provides a cohesive technology stack for building high-performance, maintainable web applications with minimal abstractions and maximum control.
+A production-ready JavaScript monorepo featuring vanilla JavaScript, Node.js, and Express.js with shared utilities, API clients, and a comprehensive design system. Build high-performance web applications with minimal dependencies and maximum control.
 
 ## Features
 
-- **Vanilla JavaScript** with ES Modules and modern browser APIs
-- **Express.js Framework** for robust server-side applications
-- **EJS Templating** for dynamic server-rendered HTML
-- **Plain CSS** with BEM methodology for maintainable styles
-- **npm Workspaces** for efficient monorepo package management
-- **Shared Packages** for UI components, utilities, and configurations
-- **File System Content** with Markdown parsing support
-- **Environment Variables** for secure configuration management
-- **Production Deployment** with Linux, systemd, and Caddy
-- **GitHub Actions** for automated CI/CD workflows
+- **Modern JavaScript** with ES Modules and shared utility packages
+- **Express.js APIs** with SQLite database and secure server-side routing
+- **Shared Components** including API client, DOM utilities, and CSS design system
+- **Real Applications** weather dashboard and todo manager with full CRUD operations
+- **Development Tools** ESLint, Prettier, and npm workspaces for seamless development
+- **Production Ready** environment configuration, deployment scripts, and security best practices
 
 ## Project Structure
 
 ```sh
 ├── apps/
-│   ├── weather/               # Weather dashboard application
-│   └── todo-list/             # Todo list application
+│   ├── weather/               # Weather dashboard with OpenWeatherMap API
+│   └── todo-list/             # Full-stack todo app with SQLite
 ├── packages/
-│   ├── utils/                 # Shared utility functions
-│   ├── ui-components/         # Shared UI components and styles
-│   └── config/                # Shared tool configurations
-├── .github/workflows/         # GitHub Actions CI/CD
-├── scripts/                   # Automation and setup scripts
-├── .eslintrc.json            # ESLint configuration
-├── .prettierrc.json          # Prettier configuration
-└── package.json              # Root workspace configuration
+│   ├── utils/                 # API client, DOM helpers, storage utilities
+│   ├── ui-components/         # CSS design system with dark/light themes
+│   └── config/                # Shared ESLint, Prettier, Node.js configs
+├── scripts/setup.js           # Automated environment setup
+└── Configuration files        # ESLint, Prettier, package.json
 ```
 
 ---
@@ -67,71 +60,35 @@ A modern JavaScript development environment featuring vanilla JavaScript, Node.j
 
 ## Quick Start
 
-### Prerequisites
+**Prerequisites:** [Node.js 18+](https://nodejs.org/) and [npm 9+](https://www.npmjs.com/)
 
-- [Node.js](https://nodejs.org/) (v18+)
-- [npm](https://www.npmjs.com/) (v9+)
-- Text editor with JavaScript support
+### Get Running in 4 Steps
 
-### Get Up and Running in 4 Steps
+```bash
+# 1. Clone and install
+git clone https://github.com/dunamismax/javascript.git
+cd javascript && npm install
 
-1. **Clone and install:**
+# 2. Run setup script
+node scripts/setup.js
 
-   ```bash
-   git clone https://github.com/dunamismax/javascript.git
-   cd javascript
-   npm install
-   ```
+# 3. Configure environment (add your OpenWeatherMap API key)
+cp apps/weather/.env.example apps/weather/.env
+# Edit apps/weather/.env with your API key
 
-2. **Run setup script:**
+# 4. Start development servers
+npm run dev
+```
 
-   ```bash
-   node scripts/setup.js
-   ```
-
-3. **Configure environment variables:**
-
-   ```bash
-   # Copy example files and configure
-   cp apps/weather/.env.example apps/weather/.env
-   cp apps/todo-list/.env.example apps/todo-list/.env
-   # Edit .env files with your API keys and settings
-   ```
-
-4. **Start development servers:**
-
-   ```bash
-   npm run dev
-   ```
-
-> **Note:** Applications will be available at their respective ports. Check each app's package.json for specific port configurations.
+**Access:** Weather app at `http://localhost:3000`, Todo app at `http://localhost:3001`
 
 ## Tech Stack
 
-### Core Foundation
-
-- **Node.js (v18+)** - JavaScript runtime with event-driven, non-blocking I/O
-- **Vanilla JavaScript (ES Modules)** - Modern JavaScript features without framework overhead
-- **npm** - Package management and dependency handling
-
-### Application Layer
-
-- **Express.js** - Minimal web application framework for Node.js
-- **EJS** - Server-side templating for dynamic HTML generation
-- **Plain CSS** - Well-structured styling with BEM methodology
-- **Vanilla DOM Manipulation** - Direct browser API usage for interactivity
-
-### Data & Configuration
-
-- **File System Content** - Local content management with Node.js fs module
-- **fetch API** - Standard web API for network requests
-- **Environment Variables** - Secure configuration via process.env
-
-### Quality & Deployment
-
-- **npm Scripts** - Automated development lifecycle management
-- **Prettier** - Opinionated code formatting
-- **ESLint** - Static analysis and code quality enforcement
+**Core:** Node.js 18+, Vanilla JavaScript ES Modules, Express.js, SQLite
+**Frontend:** EJS templates, CSS design system, shared DOM utilities
+**Shared:** API client, storage utilities, configuration packages
+**Tools:** ESLint, Prettier, npm workspaces, environment management
+**Deployment:** Linux, systemd, Caddy reverse proxy
 
 <p align="center">
   <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="600" />
@@ -139,260 +96,96 @@ A modern JavaScript development environment featuring vanilla JavaScript, Node.j
 
 ## Architecture
 
-### Frontend Applications
+**Monorepo Structure:** npm workspaces with shared packages and independent applications
 
-- **Framework:** Vanilla JavaScript with ES Modules
-- **Templating:** EJS for server-side rendering
-- **Styling:** Plain CSS with BEM methodology
-- **Interactivity:** Native DOM APIs and modern JavaScript
-- **Build:** Express.js static file serving
-- **Type Safety:** Optional JSDoc annotations
+- **`@dunamismax/utils`** - API client, DOM helpers, storage utilities, performance tools
+- **`@dunamismax/ui-components`** - CSS design system with dark/light themes
+- **`@dunamismax/config`** - Shared ESLint, Prettier, and Node.js configurations
+- **Weather App** - OpenWeatherMap integration with server-side API proxy
+- **Todo App** - Full CRUD operations with SQLite database and REST API
 
-### Backend Services
-
-- **Runtime:** Node.js with Express.js framework
-- **Authentication:** Environment-based configuration
-- **Database:** File system or external API integration
-- **Validation:** Native JavaScript validation patterns
-- **Routing:** Express.js routing with middleware support
-
-### Shared Packages
-
-- **Utils:** Reusable JavaScript utility functions
-- **UI Components:** Shared HTML/CSS/JS component patterns
-- **Config:** Development tool configurations
-
-## Available Scripts
-
-### Root Level
+## Development Scripts
 
 ```bash
-npm install       # Install all dependencies
-npm run dev       # Start all development servers
-npm run start     # Start all applications in production mode
-npm run build     # Build all applications
-npm test          # Run tests across all workspaces
-npm run lint      # Lint all JavaScript files
-npm run lint:fix  # Fix auto-fixable linting issues
-npm run format    # Format all files with Prettier
-npm run format:check # Check formatting without making changes
+# Development
+npm run dev           # Start all applications in development mode
+npm install           # Install all workspace dependencies
+
+# Code Quality
+npm run lint          # Lint all JavaScript files with ESLint
+npm run lint:fix      # Auto-fix linting issues
+npm run format        # Format code with Prettier
+npm run format:check  # Check code formatting
+
+# Production
+npm run start         # Start all applications in production mode
 ```
 
-### Individual Applications
+## Key Features
+
+**Shared API Client:** Centralized HTTP client with error handling and JSON support
+**DOM Utilities:** jQuery-style selectors and DOM manipulation helpers
+**CSS Design System:** Comprehensive theme with dark/light mode support
+**Security:** Server-side API key management and HTML escaping
+**Database:** SQLite integration with full CRUD operations
+**Development:** Hot reload, code formatting, and quality checks
+
+## Environment Setup
+
+**Weather App** (`apps/weather/.env`):
 
 ```bash
-# Weather Application
-npm run weather:dev    # Development server
-npm run weather:start  # Production server
-
-# Todo List Application
-npm run todo:dev       # Development server
-npm run todo:start     # Production server
-```
-
-### Quality Checks
-
-```bash
-npm run lint           # Run ESLint across all files
-npm run format         # Format code with Prettier
-npm run format:check   # Check if code is properly formatted
-```
-
-## Adding New Applications
-
-To add a new application to the monorepo:
-
-1. **Create Application Directory**
-
-   ```bash
-   mkdir apps/your-app-name
-   cd apps/your-app-name
-   ```
-
-2. **Initialize Package**
-
-   ```bash
-   npm init -y
-   ```
-
-3. **Set Up Basic Structure**
-
-   ```
-   apps/your-app-name/
-   ├── package.json
-   ├── server.js           # Express.js server
-   ├── views/             # EJS templates
-   │   ├── index.ejs
-   │   └── partials/
-   ├── public/            # Static assets
-   │   ├── css/
-   │   ├── js/
-   │   └── images/
-   └── routes/            # Express routes
-   ```
-
-4. **Configure Package.json**
-
-   ```json
-   {
-     "name": "@dunamismax/your-app-name",
-     "scripts": {
-       "dev": "nodemon server.js",
-       "start": "node server.js"
-     },
-     "dependencies": {
-       "express": "*",
-       "ejs": "*"
-     }
-   }
-   ```
-
-5. **Add Workspace Scripts**
-   Update root `package.json` scripts section:
-
-   ```json
-   "scripts": {
-     "your-app:dev": "npm run dev -w apps/your-app-name",
-     "your-app:start": "npm run start -w apps/your-app-name"
-   }
-   ```
-
-## Environment Variables
-
-### Weather Application (.env)
-
-```bash
-NODE_ENV=development
-PORT=3000
 OPENWEATHERMAP_API_KEY=your_api_key_here
+PORT=3000
 ```
 
-### Todo List Application (.env)
-
-```bash
-NODE_ENV=development
-PORT=3001
-DATABASE_PATH=./database/todos.db
-```
+**Todo App** runs on port 3001 with local SQLite database (no additional config required)
 
 ## Production Deployment
 
-### Development Setup
+**Quick Deploy:**
 
 ```bash
-# Install dependencies
-npm install
-
-# Start all applications
-npm run dev
+npm run start  # Production mode
 ```
 
-### Production Deployment
+**Self-Hosting:** Use systemd services and Caddy reverse proxy for production deployment on Linux servers. Applications are configured for environment-based settings and secure API key management.
 
-1. **Set up production environment:**
+## Code Examples
 
-   ```bash
-   # Configure production environment variables
-   NODE_ENV=production
-   # Set appropriate ports and API keys
-   ```
-
-2. **Build applications:**
-
-   ```bash
-   npm run build
-   ```
-
-3. **Self-hosting with Linux and systemd:**
-
-   Create systemd service files for each application:
-
-   ```ini
-   [Unit]
-   Description=Your App Name
-   After=network.target
-
-   [Service]
-   Type=simple
-   User=www-data
-   WorkingDirectory=/path/to/your/app
-   ExecStart=/usr/bin/node server.js
-   Restart=always
-   Environment=NODE_ENV=production
-
-   [Install]
-   WantedBy=multi-user.target
-   ```
-
-4. **Configure Caddy reverse proxy:**
-
-   ```
-   your-domain.com {
-     reverse_proxy localhost:3000
-   }
-   ```
-
-## Usage Examples
-
-### Creating Express.js Routes
+**Using Shared API Client:**
 
 ```javascript
-// routes/api.js
-import express from 'express';
-const router = express.Router();
-
-router.get('/data', async (req, res) => {
-  try {
-    const data = await fetchExternalData();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-export default router;
+import { ApiClient } from '@dunamismax/utils/api.js';
+const api = new ApiClient('/api');
+const todos = await api.get('/todos');
 ```
 
-### EJS Template Example
-
-```html
-<!-- views/index.ejs -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-  <h1>Welcome to <%= appName %></h1>
-  <% if (user) { %>
-    <p>Hello, <%= user.name %>!</p>
-  <% } %>
-  <script src="/js/main.js"></script>
-</body>
-</html>
-```
-
-### Shared Utility Usage
+**DOM Utilities:**
 
 ```javascript
-// Using shared utilities
-import { createApiClient } from '@dunamismax/utils/api';
-import { $, show, hide } from '@dunamismax/utils/dom';
+import { $, escapeHtml } from '@dunamismax/utils/dom.js';
+const element = $('#myElement');
+element.innerHTML = escapeHtml(userInput);
+```
 
-const api = createApiClient('http://localhost:3000/api');
-const element = $('.my-element');
-show(element);
+**CSS Design System:**
+
+```css
+/* Use shared CSS custom properties */
+color: var(--color-primary);
+background: var(--color-surface);
+padding: var(--spacing-md);
 ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run quality checks: `npm run lint && npm run format`
-5. Submit a pull request
+1. Fork and create feature branch
+2. Make changes following existing patterns
+3. Run `npm run lint && npm run format`
+4. Submit pull request
+
+**Code Style:** Uses ESLint and Prettier with shared configurations from `@dunamismax/config`
 
 ## License
 

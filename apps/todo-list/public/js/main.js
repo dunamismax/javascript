@@ -1,6 +1,9 @@
+import { ApiClient } from '@dunamismax/utils/api.js';
+import { $, $$, createElement, escapeHtml } from '@dunamismax/utils/dom.js';
+
 class TodoApp {
     constructor() {
-        this.apiUrl = 'http://localhost:3002/api';
+        this.api = new ApiClient('/api');
         this.todos = [];
         this.currentFilters = {
             category: 'all',
@@ -9,19 +12,19 @@ class TodoApp {
         };
         
         this.elements = {
-            todoForm: document.getElementById('todoForm'),
-            todoInput: document.getElementById('todoInput'),
-            prioritySelect: document.getElementById('prioritySelect'),
-            categorySelect: document.getElementById('categorySelect'),
-            todoList: document.getElementById('todoList'),
-            loadingSpinner: document.getElementById('loadingSpinner'),
-            emptyState: document.getElementById('emptyState'),
-            categoryFilter: document.getElementById('categoryFilter'),
-            priorityFilter: document.getElementById('priorityFilter'),
-            statusFilter: document.getElementById('statusFilter'),
-            totalTodos: document.getElementById('totalTodos'),
-            completedTodos: document.getElementById('completedTodos'),
-            pendingTodos: document.getElementById('pendingTodos')
+            todoForm: $('#todoForm'),
+            todoInput: $('#todoInput'),
+            prioritySelect: $('#prioritySelect'),
+            categorySelect: $('#categorySelect'),
+            todoList: $('#todoList'),
+            loadingSpinner: $('#loadingSpinner'),
+            emptyState: $('#emptyState'),
+            categoryFilter: $('#categoryFilter'),
+            priorityFilter: $('#priorityFilter'),
+            statusFilter: $('#statusFilter'),
+            totalTodos: $('#totalTodos'),
+            completedTodos: $('#completedTodos'),
+            pendingTodos: $('#pendingTodos')
         };
         
         this.init();
@@ -74,10 +77,7 @@ class TodoApp {
         this.showLoading();
         
         try {
-            const response = await fetch(`${this.apiUrl}/todos`);
-            if (!response.ok) throw new Error('Failed to fetch todos');
-            
-            this.todos = await response.json();
+            this.todos = await this.api.get('/todos');
             this.renderTodos();
         } catch (error) {
             console.error('Error loading todos:', error);
@@ -89,10 +89,7 @@ class TodoApp {
     
     async loadStats() {
         try {
-            const response = await fetch(`${this.apiUrl}/stats`);
-            if (!response.ok) throw new Error('Failed to fetch stats');
-            
-            const stats = await response.json();
+            const stats = await this.api.get('/stats');
             this.updateStatsDisplay(stats);
         } catch (error) {
             console.error('Error loading stats:', error);
@@ -100,38 +97,15 @@ class TodoApp {
     }
     
     async createTodo(todoData) {
-        const response = await fetch(`${this.apiUrl}/todos`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(todoData)
-        });
-        
-        if (!response.ok) throw new Error('Failed to create todo');
-        return await response.json();
+        return await this.api.post('/todos', todoData);
     }
     
     async updateTodo(id, updates) {
-        const response = await fetch(`${this.apiUrl}/todos/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updates)
-        });
-        
-        if (!response.ok) throw new Error('Failed to update todo');
-        return await response.json();
+        return await this.api.put(`/todos/${id}`, updates);
     }
     
     async deleteTodo(id) {
-        const response = await fetch(`${this.apiUrl}/todos/${id}`, {
-            method: 'DELETE'
-        });
-        
-        if (!response.ok) throw new Error('Failed to delete todo');
-        return await response.json();
+        return await this.api.delete(`/todos/${id}`);
     }
     
     async handleToggleComplete(id, completed) {
@@ -191,8 +165,8 @@ class TodoApp {
         
         // Add event listeners to checkboxes and buttons
         filteredTodos.forEach(todo => {
-            const checkbox = document.getElementById(`checkbox-${todo.id}`);
-            const deleteBtn = document.getElementById(`delete-${todo.id}`);
+            const checkbox = $(`#checkbox-${todo.id}`);
+            const deleteBtn = $(`#delete-${todo.id}`);
             
             checkbox.addEventListener('change', (e) => {
                 this.handleToggleComplete(todo.id, e.target.checked);
@@ -216,7 +190,7 @@ class TodoApp {
                     ${todo.completed ? 'checked' : ''}
                 />
                 <div class="todo-content">
-                    <div class="todo-text">${this.escapeHtml(todo.text)}</div>
+                    <div class="todo-text">${escapeHtml(todo.text)}</div>
                     <div class="todo-meta">
                         <span class="todo-priority ${todo.priority}">${todo.priority}</span>
                         <span class="todo-category">${todo.category}</span>
@@ -269,11 +243,6 @@ class TodoApp {
         alert(message);
     }
     
-    escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
 }
 
 // Initialize the app when DOM is loaded
