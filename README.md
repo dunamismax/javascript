@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/Vanilla-JS-Logo.png" alt="JavaScript Development Monorepo" width="600" />
+  <img src="https://github.com/dunamismax/images/blob/main/Vanilla-JS-Logo.png" alt="JavaScript Development Monorepo" width="200" />
 </p>
 
 <p align="center">
@@ -62,7 +62,7 @@ A modern JavaScript development environment featuring vanilla JavaScript, Node.j
 ---
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/JavaScript-logo.png" alt="JavaScript" width="200" />
+  <img src="https://github.com/dunamismax/images/blob/main/JavaScript-logo.png" alt="JavaScript" width="100" />
 </p>
 
 ## Quick Start
@@ -134,7 +134,7 @@ A modern JavaScript development environment featuring vanilla JavaScript, Node.j
 - **ESLint** - Static analysis and code quality enforcement
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="500" />
+  <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="600" />
 </p>
 
 ## Architecture
@@ -422,5 +422,5 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 </p>
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/js-coffee-particles.jpg" alt="JavaScript Coffee" width="400" />
+  <img src="https://github.com/dunamismax/images/blob/main/js-coffee-particles.jpg" alt="JavaScript Coffee" width="600" />
 </p>
