@@ -4,14 +4,14 @@
 
 <p align="center">
   <a href="https://github.com/dunamismax/javascript">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Modern+JavaScript+Development+Monorepo;Vanilla+JS+%2B+Node.js+%2B+Express.js;Shared+Utilities+%2B+API+Client;EJS+Templates+%2B+Server-Side+Rendering;SQLite+Database+%2B+REST+APIs;CSS+Design+System+%2B+Dark+Theme;npm+Workspaces+%2B+ES+Modules;ESLint+%2B+Prettier+%2B+Code+Quality;Weather+Dashboard+%2B+Todo+Manager;Secure+API+Key+Management;Production+Deployment+Ready;Zero+Framework+Overhead;Maximum+Performance+Control;TypeScript+Optional+JSDoc;Linux+%2B+systemd+%2B+Caddy;4-Step+Development+Setup;Real-World+Application+Examples;Monorepo+Package+Architecture;File+System+%2B+Environment+Config;GitHub+Actions+CI%2FCD+Pipeline;MIT+Licensed+Open+Source" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Modern+JavaScript+Development+Monorepo;Vanilla+JS+%2B+Node.js+%2B+Express.js;Shared+Utilities+%2B+API+Client;Vanilla+HTML+%2B+Static+Serving;SQLite+Database+%2B+REST+APIs;CSS+Design+System+%2B+Dark+Theme;npm+Workspaces+%2B+ES+Modules;ESLint+%2B+Prettier+%2B+Code+Quality;Weather+Dashboard+%2B+Todo+Manager;Secure+API+Key+Management;Production+Deployment+Ready;Zero+Framework+Overhead;Maximum+Performance+Control;TypeScript+Optional+JSDoc;Linux+%2B+systemd+%2B+Caddy;4-Step+Development+Setup;Real-World+Application+Examples;Monorepo+Package+Architecture;File+System+%2B+Environment+Config;GitHub+Actions+CI%2FCD+Pipeline;MIT+Licensed+Open+Source" alt="Typing SVG" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18+-339933.svg?logo=node.js" alt="Node.js Version"></a>
   <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-4.18+-000000.svg?logo=express" alt="Express.js Version"></a>
-  <a href="https://ejs.co/"><img src="https://img.shields.io/badge/Templates-EJS-B4CA65.svg" alt="EJS Templates"></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="https://img.shields.io/badge/Templates-Vanilla_HTML-E34F26.svg?logo=html5" alt="Vanilla HTML"></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/Vanilla_JS-ES2020+-F7DF1E.svg?logo=javascript" alt="Vanilla JS"></a>
   <a href="https://eslint.org/"><img src="https://img.shields.io/badge/Code_Quality-ESLint-4B32C3.svg?logo=eslint" alt="ESLint"></a>
   <a href="https://prettier.io/"><img src="https://img.shields.io/badge/Code_Format-Prettier-F7B93E.svg?logo=prettier" alt="Prettier"></a>
@@ -27,7 +27,7 @@
 
 # JavaScript Development Monorepo
 
-A production-ready JavaScript monorepo featuring vanilla JavaScript, Node.js, and Express.js with shared utilities, API clients, and a comprehensive design system. Build high-performance web applications with minimal dependencies and maximum control.
+A production-ready JavaScript monorepo featuring vanilla HTML, CSS, and JavaScript with Node.js and Express.js backend. Built with shared utilities, API clients, and a comprehensive design system. Build high-performance web applications with minimal dependencies and maximum control.
 
 ## Features
 
@@ -86,7 +86,7 @@ npm run dev
 ## Tech Stack
 
 **Core:** Node.js 18+, Vanilla JavaScript ES Modules, Express.js, SQLite
-**Frontend:** EJS templates, CSS design system, FlareJS router, shared DOM utilities
+**Frontend:** Vanilla HTML, CSS design system, FlareJS router, shared DOM utilities
 **Shared:** API client, storage utilities, configuration packages
 **Tools:** ESLint, Prettier, npm workspaces, environment management
 **Deployment:** Linux, systemd, Caddy reverse proxy
@@ -230,7 +230,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <p align="center">
   <strong>JavaScript Development Monorepo</strong><br>
-  <sub>Vanilla JS • Node.js • Express.js • EJS • Plain CSS • npm Workspaces • Linux • Self-Hosted</sub>
+  <sub>Vanilla JS • Node.js • Express.js • Vanilla HTML • Plain CSS • npm Workspaces • Linux • Self-Hosted</sub>
 </p>
 
 <p align="center">

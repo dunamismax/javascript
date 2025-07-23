@@ -1,7 +1,7 @@
 {
   "name": "javascript-monorepo",
   "version": "1.0.0",
-  "description": "A modern JavaScript development environment featuring vanilla JavaScript, Node.js, Express.js, and EJS",
+  "description": "A modern JavaScript development environment featuring vanilla JavaScript, Node.js, Express.js, and vanilla HTML",
   "author": {
     "name": "dunamismax",
     "email": "dunamismax@tutamail.com",
@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "ejs": "^3.1.9",
     "dotenv": "^16.4.5",
     "marked": "^12.0.0"
   },

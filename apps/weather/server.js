@@ -11,27 +11,28 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
+// Serve static HTML files
 app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'Weather Dashboard',
-  });
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', {
-    title: 'About - Weather Dashboard',
-  });
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+app.get('/about.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
 });
 
 app.get('/settings', (req, res) => {
-  res.render('settings', {
-    title: 'Settings - Weather Dashboard',
-  });
+  res.sendFile(path.join(__dirname, 'public', 'settings.html'));
+});
+
+app.get('/settings.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'settings.html'));
 });
 
 app.get('/api/weather/:city', async (req, res) => {

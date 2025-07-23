@@ -19,10 +19,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up EJS
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
 // Initialize database
 db.serialize(() => {
   db.run(`
@@ -38,17 +34,25 @@ db.serialize(() => {
     `);
 });
 
-// View Routes
+// View Routes - Serve static HTML files
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Todo List App' });
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/analytics', (req, res) => {
-  res.render('analytics', { title: 'Analytics - Todo List App' });
+  res.sendFile(path.join(__dirname, 'public', 'analytics.html'));
+});
+
+app.get('/analytics.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'analytics.html'));
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { title: 'About - Todo List App' });
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+app.get('/about.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
 });
 
 // API Routes
