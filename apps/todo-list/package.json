@@ -1,17 +1,21 @@
 {
-  "name": "todo-list-app",
+  "name": "@dunamismax/todo-list-app",
   "version": "1.0.0",
-  "description": "Full-stack todo list app with SQLite backend",
+  "description": "Full-stack todo list application built with Express.js, EJS, and SQLite",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"node build.js --watch\" \"npm run server:dev\"",
-    "build": "node build.js",
-    "start": "concurrently \"npx http-server dist -p 3001 -s\" \"npm run server:start\"",
-    "server:dev": "nodemon src/server/server.js",
-    "server:start": "node src/server/server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
+    "ejs": "^3.1.9",
     "sqlite3": "^5.1.6",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "@dunamismax/utils": "*"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

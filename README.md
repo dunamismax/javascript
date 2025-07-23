@@ -1,199 +1,237 @@
-<p align="center">
-  <img src="/images/js-evolution.jpeg" alt="js-monolith Logo" width="400" />
-</p>
+# JavaScript Development Monorepo
 
-<p align="center">
-  <a href="https://github.com/dunamismax/js-webdev">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=800&lines=Pure+JavaScript+Learning+Monorepo;Vanilla+JS+%2B+Express.js+%2B+SQLite;Lightning-Fast+esbuild+Development;Modern+Web+Standards+Focus;Zero+Framework+Learning+Environment" alt="Typing SVG" />
-  </a>
-</p>
+A modern JavaScript development environment featuring vanilla JavaScript, Node.js, Express.js, and EJS. This monorepo provides a cohesive technology stack for building high-performance, maintainable web applications with minimal abstractions and maximum control.
 
-<p align="center">
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18+-339933.svg?logo=node.js" alt="Node.js Version"></a>
-  <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-4.18+-000000.svg?logo=express" alt="Express.js Version"></a>
-  <a href="https://esbuild.github.io/"><img src="https://img.shields.io/badge/esbuild-0.19+-FFCF00.svg?logo=esbuild" alt="esbuild Version"></a>
-  <a href="https://www.sqlite.org/"><img src="https://img.shields.io/badge/SQLite-3.0+-003B57.svg?logo=sqlite" alt="SQLite Version"></a>
-  <a href="https://www.npmjs.com/"><img src="https://img.shields.io/badge/npm-9.0+-CB3837.svg?logo=npm" alt="npm Version"></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/Vanilla_JS-ES2020+-F7DF1E.svg?logo=javascript" alt="Vanilla JS"></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
-</p>
+## Tech Stack
 
----
+**Core Foundation:**
+- **Node.js (v18+)** - JavaScript runtime with event-driven, non-blocking I/O
+- **Vanilla JavaScript (ES Modules)** - Modern JavaScript features without framework overhead
+- **npm** - Package management and dependency handling
 
-## The Ultimate Pure JavaScript Learning Monorepo
+**Application Layer:**
+- **Express.js** - Minimal web application framework for Node.js
+- **EJS** - Server-side templating for dynamic HTML generation
+- **Plain CSS** - Well-structured styling with BEM methodology
+- **Vanilla DOM Manipulation** - Direct browser API usage for interactivity
 
-Modern web development learning environment built with vanilla JavaScript, Express.js, and SQLite. Perfect for understanding core web technologies without framework overhead.
+**Data & Configuration:**
+- **File System Content** - Local content management with Node.js fs module
+- **fetch API** - Standard web API for network requests
+- **Environment Variables** - Secure configuration via process.env
 
-### Tech Stack
+**Quality & Deployment:**
+- **npm Scripts** - Automated development lifecycle management
+- **Prettier** - Opinionated code formatting
+- **ESLint** - Static analysis and code quality enforcement
 
-- **Frontend**: Vanilla JavaScript + Modern CSS + Web APIs
-- **Backend**: Express.js + Node.js + SQLite database
-- **Build**: esbuild for lightning-fast development
-- **Learning**: Pure web standards without abstractions
+## Project Structure
+
+```
+/
+├── .github/workflows/     # GitHub Actions CI/CD
+├── apps/                  # Deployable applications
+├── packages/              # Shared code libraries
+├── scripts/               # Automation and operational scripts
+├── .eslintrc.json        # ESLint configuration
+├── .prettierrc.json      # Prettier configuration
+├── package.json          # Root workspace configuration
+└── README.md
+```
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/dunamismax/js-webdev.git
-cd js-webdev
-npm install && npm run dev
+# Clone the repository
+git clone https://github.com/dunamismax/javascript.git
+cd javascript
+
+# Install dependencies
+npm install
+
+# Start development environment
+npm run dev
 ```
 
-**Applications:**
+## Adding New Applications
 
-- Weather App: <http://localhost:3000>
-- Todo List Frontend: <http://localhost:3001>
-- Todo List API: <http://localhost:3002>
+To add a new application to the monorepo:
 
-## Applications
+1. **Create Application Directory**
+   ```bash
+   mkdir apps/your-app-name
+   cd apps/your-app-name
+   ```
 
-### 1. Weather App (Port 3000)
+2. **Initialize Package**
+   ```bash
+   npm init -y
+   ```
 
-Dark-themed weather dashboard with OpenWeatherMap API integration
+3. **Set Up Basic Structure**
+   ```
+   apps/your-app-name/
+   ├── package.json
+   ├── server.js           # Express.js server
+   ├── views/             # EJS templates
+   │   ├── index.ejs
+   │   └── partials/
+   ├── public/            # Static assets
+   │   ├── css/
+   │   ├── js/
+   │   └── images/
+   └── routes/            # Express routes
+   ```
 
-**Features:**
+4. **Configure Package.json**
+   ```json
+   {
+     "name": "@your-namespace/your-app-name",
+     "scripts": {
+       "dev": "nodemon server.js",
+       "start": "node server.js"
+     },
+     "dependencies": {
+       "express": "*",
+       "ejs": "*"
+     }
+   }
+   ```
 
-- Real-time weather data fetching
-- Dark theme responsive UI
-- City search functionality
-- Detailed weather metrics display
-- Modern CSS Grid/Flexbox layouts
-
-**Setup:**
-
-1. Get a free API key from [OpenWeatherMap](https://openweathermap.org/api)
-2. Copy `apps/weather/.env.example` to `apps/weather/.env`
-3. Add your API key: `OPENWEATHERMAP_API_KEY=your_key_here`
-
-### 2. Todo List App (Ports 3001-3002)
-
-Full-stack task management application demonstrating client-server architecture
-
-**Features:**
-
-- CRUD operations with SQLite persistence
-- Priority levels and category organization
-- Advanced filtering and statistics
-- RESTful API design patterns
-- Responsive frontend with vanilla JS
-
-**API Endpoints:**
-
-- `GET /api/todos` - Retrieve todos with optional filters
-- `POST /api/todos` - Create new todo items
-- `PUT /api/todos/:id` - Update existing todos
-- `DELETE /api/todos/:id` - Remove todo items
-- `GET /api/stats` - Get usage statistics
+5. **Add Workspace Scripts**
+   Update root `package.json` scripts section:
+   ```json
+   "scripts": {
+     "your-app:dev": "npm run dev -w apps/your-app-name",
+     "your-app:start": "npm run start -w apps/your-app-name"
+   }
+   ```
 
 ## Development Commands
 
+**Global Commands:**
 ```bash
-npm run dev           # Start all applications
-npm run build         # Build for production
-npm run clean         # Clean build artifacts
+npm run dev          # Start all applications in development mode
+npm run lint         # Run ESLint across all workspaces
+npm run format       # Format code with Prettier
+npm test             # Run tests across all workspaces
 ```
 
-### Individual Apps
+**Application-Specific Commands:**
+```bash
+npm run [app-name]:dev    # Start specific app in development
+npm run [app-name]:start  # Start specific app in production
+```
+
+## Shared Libraries
+
+### Creating Shared Packages
+
+1. **Create Package Directory**
+   ```bash
+   mkdir packages/your-package-name
+   cd packages/your-package-name
+   npm init -y
+   ```
+
+2. **Configure as Internal Package**
+   ```json
+   {
+     "name": "@your-namespace/your-package-name",
+     "main": "index.js",
+     "type": "module"
+   }
+   ```
+
+3. **Use in Applications**
+   ```json
+   {
+     "dependencies": {
+       "@your-namespace/your-package-name": "*"
+     }
+   }
+   ```
+
+### Available Shared Utilities
+
+- **UI Components** (`packages/ui-components/`) - Reusable HTML/CSS/JS components
+- **Utils** (`packages/utils/`) - Common utility functions and helpers
+- **Config** (`packages/config/`) - Shared configurations for tools and services
+
+## Code Quality
+
+**ESLint Configuration** (`.eslintrc.json`)
+- Enforces modern JavaScript standards
+- Prevents common bugs and anti-patterns
+- Maintains consistent code style
+
+**Prettier Configuration** (`.prettierrc.json`)
+- Automatic code formatting
+- Consistent style across all projects
+- Integration with development workflow
+
+## Environment Configuration
+
+Create `.env` files in individual applications:
 
 ```bash
-npm run weather:dev    # Weather app development
-npm run weather:build  # Weather app production build
-npm run todo:dev       # Todo app (frontend + backend)
-npm run todo:build     # Todo app production build
+# apps/your-app/env
+NODE_ENV=development
+PORT=3000
+DATABASE_URL=sqlite:./database.db
+API_KEY=your_api_key_here
 ```
 
-## Architecture
-
-### Project Structure
-
-```
-js-webdev/
-├── apps/
-│   ├── weather/           # Weather dashboard
-│   └── todo-list/         # Full-stack todo app
-├── shared/
-│   ├── utils/             # Reusable JavaScript utilities
-│   └── styles/            # Common CSS variables & reset
-├── packages/              # Shared server utilities
-└── esbuild.config.js      # Build configuration
-```
-
-### Shared Utilities
-
-**API Client (`shared/utils/api.js`)**
-
+Load with dotenv in your application:
 ```javascript
-import { createApiClient } from "../shared/utils/api.js";
-const api = createApiClient("http://localhost:3002/api");
-const todos = await api.get("/todos");
+import dotenv from 'dotenv';
+dotenv.config();
+
+const port = process.env.PORT || 3000;
 ```
 
-**DOM Helpers (`shared/utils/dom.js`)**
+## Production Deployment
 
-```javascript
-import { $, $$, createElement, show, hide } from "../shared/utils/dom.js";
-const element = $(".my-class");
-show(element);
+**Build Process:**
+```bash
+npm run build        # Build all applications for production
 ```
 
-**Storage Management (`shared/utils/storage.js`)**
+**Deployment Stack:**
+- **Linux Server** - Ubuntu/Debian hosting environment
+- **systemd** - Process management and service monitoring
+- **Caddy** - Reverse proxy with automatic HTTPS
 
-```javascript
-import { localStorage, sessionStorage } from "../shared/utils/storage.js";
-localStorage.set("key", { data: "value" });
+**Example systemd Service:**
+```ini
+[Unit]
+Description=Your App Name
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/path/to/your/app
+ExecStart=/usr/bin/node server.js
+Restart=always
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
 ```
-
-## Learning Benefits
-
-- **Pure JavaScript**: Master core language features without framework abstractions
-- **Modern Web APIs**: Learn fetch, localStorage, DOM manipulation, and more
-- **Full-Stack Understanding**: See how frontend and backend communicate
-- **Build Tools**: Experience modern development workflow with esbuild
-- **Database Integration**: Understand SQL and data persistence patterns
-
-## Performance Benefits
-
-- **Lightning builds**: esbuild compiles in milliseconds
-- **Minimal bundles**: No framework overhead, just your code
-- **Modern JavaScript**: ES2020+ features with browser compatibility
-- **Hot reloading**: Instant feedback during development
 
 ## Contributing
 
-Fork → Feature branch → Test → Pull request
-
-## Support This Project
-
-If you find this JavaScript Learning Monorepo valuable, consider supporting its development:
-
-<p align="center">
-  <a href="https://www.buymeacoffee.com/dunamismax" target="_blank">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" />
-  </a>
-</p>
-
-## Connect
-
-<p align="center">
-  <a href="https://twitter.com/dunamismax" target="_blank"><img src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter"></a>
-  <a href="https://bsky.app/profile/dunamismax.bsky.social" target="_blank"><img src="https://img.shields.io/badge/Bluesky-blue?style=for-the-badge&logo=bluesky&logoColor=white" alt="Bluesky"></a>
-  <a href="https://reddit.com/user/dunamismax" target="_blank"><img src="https://img.shields.io/badge/Reddit-%23FF4500.svg?&style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit"></a>
-  <a href="https://discord.com/users/dunamismax" target="_blank"><img src="https://img.shields.io/badge/Discord-dunamismax-7289DA.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://signal.me/#p/+dunamismax.66" target="_blank"><img src="https://img.shields.io/badge/Signal-dunamismax.66-3A76F0.svg?style=for-the-badge&logo=signal&logoColor=white" alt="Signal"></a>
-</p>
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run quality checks: `npm run lint && npm run format`
+5. Submit a pull request
 
 ## License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-<p align="center">
-  <img src="/images/js-yellow-crown.jpg" alt="JavaScript Yellow" width="400" />
-</p>
-
-<p align="center">
-  <strong>The Ultimate Pure JavaScript Learning Monorepo</strong><br>
-  <sub>Vanilla JS + Express.js + SQLite + esbuild + Modern Web Standards</sub><br>
-  <sub>Perfect Learning Environment + Zero Framework Overhead + Real-World Patterns</sub>
-</p>
+**JavaScript Development Monorepo** - A professional environment for building modern web applications with vanilla JavaScript, Node.js, and Express.js.

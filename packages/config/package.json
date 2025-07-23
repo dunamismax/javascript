@@ -1,0 +1,13 @@
+{
+  "name": "@dunamismax/config",
+  "version": "1.0.0",
+  "description": "Shared configurations for development tools",
+  "main": "index.js",
+  "type": "module",
+  "keywords": ["config", "eslint", "prettier"],
+  "author": {
+    "name": "dunamismax",
+    "email": "dunamismax@tutamail.com"
+  },
+  "license": "MIT"
+}
