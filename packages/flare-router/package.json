@@ -1,5 +1,5 @@
 {
-  "name": "flare-router",
+  "name": "@dunamismax/flare-router",
   "version": "1.0.0",
   "description": "Blazingly fast SPA-like router for static sites - Pure vanilla JS",
   "main": "dist/main.js",

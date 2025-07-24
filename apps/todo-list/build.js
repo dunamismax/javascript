@@ -35,7 +35,7 @@ function processHTMLFiles() {
     // Update asset paths to use bundled versions  
     html = html.replace(/href="\/css\/styles\.css"/, 'href="css/styles.min.css"');
     html = html.replace(/src="\/js\/main\.js"/, 'src="js/main.min.js"');
-    // FlareJS is now imported as ES module, no need to replace it
+    // flare-router is now imported as ES module, no need to replace it
 
     writeFileSync(distHtmlPath, html, 'utf8');
     console.log(`✓ Processed ${htmlFile}`);
