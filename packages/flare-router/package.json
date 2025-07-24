@@ -27,11 +27,8 @@
   "author": "dunamismax <dunamismax@tutamail.com>",
   "license": "MIT",
   "devDependencies": {
-    "esbuild": "^0.23.0",
-    "eslint": "^8.22.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-sonarjs": "^0.15.0",
-    "prettier": "^2.7.1"
+    "esbuild": "^0.25.8",
+    "eslint": "^9.31.0",
+    "prettier": "^3.6.2"
   }
 }

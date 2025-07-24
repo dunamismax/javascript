@@ -10,11 +10,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "pnpm run dev --recursive --if-present",
-    "start": "pnpm run start --recursive --if-present",
-    "build": "pnpm run build --recursive --if-present",
-    "build:dev": "pnpm run build --recursive --if-present -- --dev",
-    "test": "pnpm test --recursive --if-present",
+    "dev": "pnpm --recursive --if-present run dev",
+    "start": "pnpm --recursive --if-present run start",
+    "build": "pnpm --recursive --if-present run build",
+    "build:dev": "pnpm --recursive --if-present run build:dev",
+    "test": "pnpm --recursive --if-present run test",
     "lint": "eslint . --ext .js,.mjs",
     "lint:fix": "eslint . --ext .js,.mjs --fix",
     "format": "prettier --write .",
@@ -26,18 +26,19 @@
     "dev:weather": "cd apps/weather && pnpm dev"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "@eslint/js": "^9.0.0",
-    "prettier": "^3.2.5",
-    "nodemon": "^3.0.3",
-    "concurrently": "^8.2.2",
-    "esbuild": "^0.19.12"
+    "eslint": "^9.31.0",
+    "@eslint/js": "^9.31.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.6.2",
+    "nodemon": "^3.1.10",
+    "concurrently": "^9.2.0",
+    "esbuild": "^0.25.8"
   },
   "dependencies": {
-    "fastify": "^4.24.3",
-    "mongodb": "^6.3.0",
-    "@vinejs/vine": "^1.7.1",
-    "dotenv": "^16.4.5"
+    "fastify": "^5.4.0",
+    "mongodb": "^6.18.0",
+    "@vinejs/vine": "^3.0.1",
+    "dotenv": "^17.2.0"
   },
   "engines": {
     "node": ">=18.0.0",

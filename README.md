@@ -28,18 +28,18 @@
 
 # Full-Stack Vanilla JavaScript Monorepo
 
-A production-ready JavaScript monorepo featuring **flare-router** - a blazingly fast 3.4kB SPA router with intelligent prefetching. Built with vanilla HTML, CSS, and JavaScript frontend, Node.js, Fastify, and MongoDB backend. Experience lightning-fast navigation that makes static sites feel like modern SPAs with zero configuration and maximum performance.
+A production-ready JavaScript monorepo featuring **flare-router** - a blazingly fast 3.4kB SPA router with intelligent prefetching. Built with vanilla HTML, CSS, and JavaScript frontend, Node.js, Fastify, and MongoDB backend.
 
 ## Features
 
-- **🔥 flare-router** - Lightning-fast 3.4kB router with intelligent prefetching, IntersectionObserver, and SPA-like navigation
-- **⚡ Zero-Config Performance** - Instant page transitions, state preservation, and enhanced user experience
-- **🏗️ Modern Full-Stack Architecture** with Fastify backend, MongoDB database, and VineJS validation
-- **🎨 Vanilla Frontend Experience** with HTML, CSS, JavaScript, and zero framework overhead
-- **📦 Shared Utilities** including API client, DOM helpers, storage management, and CSS design system
-- **🚀 Real Applications** Todo list with analytics dashboard and weather app showcasing flare-router capabilities
-- **🛠️ Development Tools** esbuild bundling, ESLint, Prettier, and pnpm workspaces for seamless development
-- **🔒 Production Ready** systemd services, Caddy reverse proxy, environment configuration, and security best practices
+- **flare-router** - Lightning-fast 3.4kB router with intelligent prefetching and SPA-like navigation
+- **Zero-Config Performance** - Instant page transitions and state preservation
+- **Modern Full-Stack Architecture** with Fastify backend, MongoDB database, and VineJS validation
+- **Vanilla Frontend Experience** with HTML, CSS, JavaScript, and zero framework overhead
+- **Shared Utilities** including API client, DOM helpers, storage management, and CSS design system
+- **Real Applications** Todo list with analytics dashboard and weather app
+- **Development Tools** esbuild bundling, ESLint, Prettier, and pnpm workspaces
+- **Production Ready** systemd services, Caddy reverse proxy, and security best practices
 
 ## Project Structure
 
@@ -87,73 +87,47 @@ pnpm dev
 
 **Access:** Todo List at `http://localhost:3001`, Weather Dashboard at `http://localhost:3000`
 
-## 🔥 flare-router - The Heart of Lightning-Fast Navigation
+## flare-router - Lightning-Fast Navigation
 
-flare-router is the custom-built 3.4kB router that powers both applications in this monorepo, transforming static websites into blazingly fast Single Page Applications. Experience the future of web navigation with zero configuration.
+flare-router is the custom-built 3.4kB router that powers both applications, transforming static websites into fast Single Page Applications with zero configuration.
 
-### ✨ Key Features
+### Key Features
 
-- **🎯 Zero Configuration** - Works out of the box with any static site
-- **⚡ Lightning Fast** - Only 3.4kB gzipped, faster than traditional frameworks
-- **🧠 Intelligent Prefetching** - Uses IntersectionObserver to prefetch visible links automatically
-- **🔄 State Preservation** - JavaScript state persists between page navigations
-- **📱 SPA Experience** - Instant page transitions without full reloads
-- **🎨 Framework Agnostic** - Drop-in solution for any website architecture
-- **🔧 Developer Friendly** - Built-in progress tracking and event system
+- **Zero Configuration** - Works out of the box with any static site
+- **Lightning Fast** - Only 3.4kB gzipped
+- **Intelligent Prefetching** - Uses IntersectionObserver to prefetch visible links automatically
+- **State Preservation** - JavaScript state persists between page navigations
+- **SPA Experience** - Instant page transitions without full reloads
+- **Framework Agnostic** - Drop-in solution for any website architecture
 
-### 🚀 flare-router in Action
-
-```javascript
-// Simple setup - just import and initialize
-import flare from '@dunamismax/flare-router';
-const router = flare({ prefetch: 'visible', log: true });
-
-// That's it! Your site now feels blazingly fast
-// - Links are prefetched when they become visible
-// - Page transitions are instant
-// - JavaScript state is preserved
-// - Users get a modern SPA experience
-```
-
-### 🎯 Why flare-router?
-
-Traditional frameworks add hundreds of KB and complex abstractions. flare-router gives you the performance benefits of SPAs with vanilla simplicity:
-
-- **Next.js**: ~300KB+ bundle size vs **flare-router**: 3.4kB
-- **React Router**: Requires React ecosystem vs **flare-router**: Works with any HTML
-- **Vue Router**: Framework coupling vs **flare-router**: Framework agnostic
-- **Traditional MPAs**: Full page reloads vs **flare-router**: Instant transitions
-
-### 📊 Performance Comparison
+### Performance Comparison
 
 | Metric           | Traditional MPA    | flare-router Enhanced |
 | ---------------- | ------------------ | --------------------- |
 | Page Load Time   | 500-2000ms         | 50-200ms              |
 | Navigation Speed | Full reload        | Instant               |
 | JavaScript State | Lost on navigation | Preserved             |
-| User Experience  | Page flickers      | Smooth transitions    |
 | Bundle Size      | N/A                | 3.4kB                 |
-| Configuration    | N/A                | Zero config           |
 
 ## Tech Stack
 
-**🔥 flare-router:** 3.4kB zero-config SPA router with intelligent prefetching and IntersectionObserver
+**flare-router:** 3.4kB zero-config SPA router with intelligent prefetching
 **Core:** Node.js 18+, Vanilla JavaScript ES Modules, Fastify, MongoDB Native Driver
-**Frontend:** Vanilla HTML, CSS with design system, JavaScript DOM manipulation, lightning-fast navigation
-**Shared:** VineJS validation, API client utilities, storage management, CSS custom properties
-**Tools:** esbuild bundling, ESLint, Prettier, pnpm workspaces, environment management
+**Frontend:** Vanilla HTML, CSS with design system, JavaScript DOM manipulation
+**Shared:** VineJS validation, API client utilities, storage management
+**Tools:** esbuild bundling, ESLint, Prettier, pnpm workspaces
 **Deployment:** Linux, systemd process management, Caddy reverse proxy with automatic HTTPS
 
 ## Architecture
 
 **Monorepo Structure:** pnpm workspaces with shared packages and independent applications
 
-- **🔥 `@dunamismax/flare-router`** - Lightning-fast 3.4kB router with intelligent prefetching, zero configuration, and SPA-like navigation
-- **🛠️ `@dunamismax/utils`** - API client, DOM helpers, storage utilities, performance tools
-- **🎨 `@dunamismax/ui-components`** - CSS design system with dark/light themes and comprehensive variables
-- **⚙️ `@dunamismax/config`** - Shared ESLint, Prettier, and development configurations
-- **📝 Todo List App** - Full CRUD operations with MongoDB, VineJS validation, analytics dashboard, and flare-router navigation
-- **🌤️ Weather App** - OpenWeatherMap integration with server-side API proxy, responsive design, and instant navigation
+- **`@dunamismax/flare-router`** - 3.4kB router with intelligent prefetching and SPA-like navigation
+- **`@dunamismax/utils`** - API client, DOM helpers, storage utilities
+- **`@dunamismax/ui-components`** - CSS design system with dark/light themes
+- **`@dunamismax/config`** - Shared ESLint, Prettier configurations
+- **Todo List App** - Full CRUD operations with MongoDB, VineJS validation, analytics dashboard
+- **Weather App** - OpenWeatherMap integration with server-side API proxy, ZIP code support
 
 ## Development Scripts
 
@@ -184,14 +158,13 @@ pnpm start            # Start all applications in production mode
 
 ## Key Features
 
-**🔥 flare-router Performance:** 3.4kB router with intelligent prefetching makes static sites feel like blazingly fast SPAs
-**⚡ Ultra-High Performance:** Fastify backend (2-3x faster than Express), MongoDB native driver, esbuild bundling (10-100x faster), vanilla frontend with zero framework overhead
+**High Performance:** Fastify backend, MongoDB native driver, esbuild bundling, vanilla frontend with zero framework overhead
 
-**Enterprise Security:** VineJS validation with detailed error messages, input sanitization and XSS protection, environment isolation, OWASP-compliant security headers
+**Security:** VineJS validation with detailed error messages, input sanitization and XSS protection, rate limiting, centralized error handling
 
 **Modern Development:** Hot reload with nodemon, source maps for debugging, ESLint + Prettier integration, monorepo benefits with shared utilities
 
-**Production Deployment:** systemd services with auto-restart, Caddy reverse proxy with automatic HTTPS, asset optimization with intelligent caching, health monitoring and logging
+**Production Deployment:** systemd services with auto-restart, Caddy reverse proxy with automatic HTTPS, asset optimization with intelligent caching
 
 ## Environment Setup
 
@@ -211,6 +184,8 @@ PORT=3000
 NODE_ENV=production
 ```
 
+**Note:** Weather app now uses US ZIP codes only for enhanced validation and security.
+
 ## Production Deployment
 
 **Quick Deploy:**
@@ -222,122 +197,25 @@ pnpm start    # Start in production mode
 
 **Self-Hosting:** Use systemd services and Caddy reverse proxy for production deployment on Linux servers. Complete configurations included for process management, automatic HTTPS, and security headers.
 
-## Code Examples
-
-**Backend API with VineJS Validation:**
-
-```javascript
-// VineJS schema validation
-const todoSchema = vine.object({
-  text: vine.string().trim().minLength(1),
-  priority: vine.enum(['high', 'medium', 'low']).optional(),
-  category: vine
-    .enum(['general', 'work', 'personal', 'shopping', 'health'])
-    .optional(),
-});
-
-// Fastify route with validation
-fastify.post('/api/todos', async (request, reply) => {
-  const data = await vine.validate({ schema: todoSchema, data: request.body });
-  const result = await todosCollection.insertOne({
-    ...data,
-    completed: false,
-    createdAt: new Date(),
-  });
-  return reply.status(201).send(result);
-});
-```
-
-**Frontend with Shared Utilities:**
-
-```javascript
-// Clean API integration
-import { ApiClient } from '@dunamismax/utils/api';
-const api = new ApiClient('/api');
-const todos = await api.get('/todos?category=work&priority=high');
-
-// DOM utilities with XSS protection
-import { $, escapeHtml } from '@dunamismax/utils/dom';
-const element = $('#todoList');
-element.innerHTML = escapeHtml(userInput);
-```
-
-**🔥 flare-router - Lightning Fast SPA Navigation:**
-
-```javascript
-// Zero-config setup - just import and go!
-import flare from '@dunamismax/flare-router';
-const router = flare({
-  prefetch: 'visible', // Intelligent prefetching with IntersectionObserver
-  log: true, // Debug mode for development
-});
-
-// Programmatic navigation
-router.go('/analytics'); // Instant navigation
-router.back(); // Browser back
-router.forward(); // Browser forward
-
-// Event-driven architecture
-window.addEventListener('flare:router:fetch', showLoadingSpinner);
-window.addEventListener('flare:router:fetch-progress', updateProgressBar);
-window.addEventListener('flare:router:end', hideLoadingSpinner);
-
-// State preservation - JavaScript stays alive between page navigations!
-// Perfect for maintaining user input, scroll position, and application state
-```
-
-**MongoDB Operations:**
-
-```javascript
-// Advanced aggregation for analytics
-const stats = await todosCollection
-  .aggregate([
-    { $group: { _id: '$priority', count: { $sum: 1 } } },
-    { $project: { priority: '$_id', count: 1, _id: 0 } },
-  ])
-  .toArray();
-
-// Efficient filtering with indexes
-const todos = await todosCollection
-  .find({ category: 'work', completed: false })
-  .sort({ createdAt: -1 })
-  .toArray();
-```
-
-**esbuild Configuration:**
-
-```javascript
-// Lightning-fast bundling
-await esbuild.build({
-  entryPoints: ['public/js/main.js'],
-  bundle: true,
-  minify: !isDev,
-  sourcemap: isDev,
-  target: ['es2020'],
-  format: 'esm',
-  outfile: 'dist/js/main.min.js',
-});
-```
-
 ## Applications
 
-**📝 Todo List Application:**
+**Todo List Application:**
 
 - Full CRUD operations with MongoDB backend and VineJS validation
 - Advanced filtering by category, priority, and completion status
 - Real-time analytics dashboard with statistics and charts
 - Priority management (High, Medium, Low) with visual indicators
 - Category organization (Work, Personal, Shopping, Health, General)
-- **🔥 flare-router Integration:** Lightning-fast navigation between tasks, analytics, and about pages
+- Rate limiting and centralized error handling
 
-**🌤️ Weather Dashboard:**
+**Weather Dashboard:**
 
 - OpenWeatherMap API integration with server-side proxy for security
+- US ZIP code validation for enhanced security
 - Responsive design optimized for mobile and desktop
-- Settings management for temperature units and preferences
 - Comprehensive weather data including humidity, wind, pressure, visibility
-- Error handling with graceful degradation and user-friendly messages
-- **🔥 flare-router Integration:** Instant transitions between dashboard, settings, and about pages with intelligent prefetching
+- Rate limiting and centralized error handling
+- Intelligent prefetching with flare-router
 
 ## Contributing
 

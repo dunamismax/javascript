@@ -4,6 +4,7 @@ import vine from '@vinejs/vine';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import rateLimit from '@fastify/rate-limit';
 
 dotenv.config();
 
@@ -17,6 +18,13 @@ const MONGODB_URI =
 // Create Fastify instance
 const fastify = Fastify({
   logger: true,
+});
+
+// Register rate limiting
+await fastify.register(rateLimit, {
+  max: 100, // 100 requests
+  timeWindow: '1 minute',
+  skipOnError: false,
 });
 
 // MongoDB connection
@@ -35,6 +43,61 @@ async function connectToDatabase() {
     process.exit(1);
   }
 }
+
+// Centralized error handling middleware
+class AppError extends Error {
+  constructor(message, statusCode = 500, code = 'INTERNAL_ERROR') {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.name = 'AppError';
+  }
+}
+
+// Custom error handler
+const errorHandler = (error, request, reply) => {
+  // VineJS validation errors
+  if (error.messages) {
+    return reply.status(400).send({
+      error: 'Validation failed',
+      code: 'VALIDATION_ERROR',
+      details: error.messages,
+    });
+  }
+
+  // Custom application errors
+  if (error instanceof AppError) {
+    return reply.status(error.statusCode).send({
+      error: error.message,
+      code: error.code,
+    });
+  }
+
+  // MongoDB errors
+  if (error.name === 'MongoError' || error.name === 'MongoServerError') {
+    request.log.error(error);
+    return reply.status(500).send({
+      error: 'Database error occurred',
+      code: 'DATABASE_ERROR',
+    });
+  }
+
+  // Rate limit errors
+  if (error.statusCode === 429) {
+    return reply.status(429).send({
+      error: 'Too many requests',
+      code: 'RATE_LIMIT_EXCEEDED',
+      retryAfter: error.retryAfter,
+    });
+  }
+
+  // Default error handling
+  request.log.error(error);
+  reply.status(error.statusCode || 500).send({
+    error: error.statusCode < 500 ? error.message || 'Bad request' : 'Internal server error',
+    code: error.statusCode < 500 ? 'CLIENT_ERROR' : 'INTERNAL_ERROR',
+  });
+};
 
 // VineJS validation schemas
 const createTodoSchema = vine.object({
@@ -94,189 +157,176 @@ fastify.get('/about.html', async (request, reply) => {
 // API Routes
 
 // Get all todos
-fastify.get('/api/todos', async (request, reply) => {
-  try {
-    const query = await vine.validate({
-      schema: querySchema,
-      data: request.query,
-    });
-
-    const filter = {};
-
-    if (query.category && query.category !== 'all') {
-      filter.category = query.category;
+fastify.get('/api/todos', {
+  config: {
+    rateLimit: {
+      max: 50,
+      timeWindow: '1 minute'
     }
-
-    if (query.completed !== undefined) {
-      filter.completed = query.completed === 'true';
-    }
-
-    if (query.priority && query.priority !== 'all') {
-      filter.priority = query.priority;
-    }
-
-    const todos = await todosCollection
-      .find(filter)
-      .sort({ createdAt: -1 })
-      .toArray();
-
-    return todos;
-  } catch (error) {
-    if (error.messages) {
-      return reply
-        .status(400)
-        .send({ error: 'Invalid query parameters', details: error.messages });
-    }
-    request.log.error(error);
-    return reply.status(500).send({ error: 'Internal server error' });
   }
+}, async (request, reply) => {
+  const query = await vine.validate({
+    schema: querySchema,
+    data: request.query,
+  });
+
+  const filter = {};
+
+  if (query.category && query.category !== 'all') {
+    filter.category = query.category;
+  }
+
+  if (query.completed !== undefined) {
+    filter.completed = query.completed === 'true';
+  }
+
+  if (query.priority && query.priority !== 'all') {
+    filter.priority = query.priority;
+  }
+
+  const todos = await todosCollection
+    .find(filter)
+    .sort({ createdAt: -1 })
+    .toArray();
+
+  return todos;
 });
 
 // Create new todo
-fastify.post('/api/todos', async (request, reply) => {
-  try {
-    const data = await vine.validate({
-      schema: createTodoSchema,
-      data: request.body,
-    });
-
-    const newTodo = {
-      text: data.text,
-      completed: false,
-      priority: data.priority || 'medium',
-      category: data.category || 'general',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    const result = await todosCollection.insertOne(newTodo);
-    const createdTodo = await todosCollection.findOne({
-      _id: result.insertedId,
-    });
-
-    return reply.status(201).send(createdTodo);
-  } catch (error) {
-    if (error.messages) {
-      return reply
-        .status(400)
-        .send({ error: 'Validation failed', details: error.messages });
+fastify.post('/api/todos', {
+  config: {
+    rateLimit: {
+      max: 20,
+      timeWindow: '1 minute'
     }
-    request.log.error(error);
-    return reply.status(500).send({ error: 'Internal server error' });
   }
+}, async (request, reply) => {
+  const data = await vine.validate({
+    schema: createTodoSchema,
+    data: request.body,
+  });
+
+  const newTodo = {
+    text: data.text,
+    completed: false,
+    priority: data.priority || 'medium',
+    category: data.category || 'general',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
+  const result = await todosCollection.insertOne(newTodo);
+  const createdTodo = await todosCollection.findOne({
+    _id: result.insertedId,
+  });
+
+  return reply.status(201).send(createdTodo);
 });
 
 // Update todo
-fastify.put('/api/todos/:id', async (request, reply) => {
-  try {
-    const params = await vine.validate({
-      schema: idParamsSchema,
-      data: request.params,
-    });
-
-    const data = await vine.validate({
-      schema: updateTodoSchema,
-      data: request.body,
-    });
-
-    if (Object.keys(data).length === 0) {
-      return reply.status(400).send({ error: 'No valid fields to update' });
+fastify.put('/api/todos/:id', {
+  config: {
+    rateLimit: {
+      max: 30,
+      timeWindow: '1 minute'
     }
-
-    const updateData = { ...data, updatedAt: new Date() };
-
-    const result = await todosCollection.updateOne(
-      { _id: new ObjectId(params.id) },
-      { $set: updateData }
-    );
-
-    if (result.matchedCount === 0) {
-      return reply.status(404).send({ error: 'Todo not found' });
-    }
-
-    const updatedTodo = await todosCollection.findOne({
-      _id: new ObjectId(params.id),
-    });
-    return updatedTodo;
-  } catch (error) {
-    if (error.messages) {
-      return reply
-        .status(400)
-        .send({ error: 'Validation failed', details: error.messages });
-    }
-    request.log.error(error);
-    return reply.status(500).send({ error: 'Internal server error' });
   }
+}, async (request, reply) => {
+  const params = await vine.validate({
+    schema: idParamsSchema,
+    data: request.params,
+  });
+
+  const data = await vine.validate({
+    schema: updateTodoSchema,
+    data: request.body,
+  });
+
+  if (Object.keys(data).length === 0) {
+    throw new AppError('No valid fields to update', 400, 'INVALID_UPDATE');
+  }
+
+  const updateData = { ...data, updatedAt: new Date() };
+
+  const result = await todosCollection.updateOne(
+    { _id: new ObjectId(params.id) },
+    { $set: updateData }
+  );
+
+  if (result.matchedCount === 0) {
+    throw new AppError('Todo not found', 404, 'TODO_NOT_FOUND');
+  }
+
+  const updatedTodo = await todosCollection.findOne({
+    _id: new ObjectId(params.id),
+  });
+  return updatedTodo;
 });
 
 // Delete todo
-fastify.delete('/api/todos/:id', async (request, reply) => {
-  try {
-    const params = await vine.validate({
-      schema: idParamsSchema,
-      data: request.params,
-    });
-
-    const result = await todosCollection.deleteOne({
-      _id: new ObjectId(params.id),
-    });
-
-    if (result.deletedCount === 0) {
-      return reply.status(404).send({ error: 'Todo not found' });
+fastify.delete('/api/todos/:id', {
+  config: {
+    rateLimit: {
+      max: 20,
+      timeWindow: '1 minute'
     }
-
-    return { message: 'Todo deleted successfully' };
-  } catch (error) {
-    if (error.messages) {
-      return reply
-        .status(400)
-        .send({ error: 'Validation failed', details: error.messages });
-    }
-    request.log.error(error);
-    return reply.status(500).send({ error: 'Internal server error' });
   }
+}, async (request, reply) => {
+  const params = await vine.validate({
+    schema: idParamsSchema,
+    data: request.params,
+  });
+
+  const result = await todosCollection.deleteOne({
+    _id: new ObjectId(params.id),
+  });
+
+  if (result.deletedCount === 0) {
+    throw new AppError('Todo not found', 404, 'TODO_NOT_FOUND');
+  }
+
+  return { message: 'Todo deleted successfully' };
 });
 
 // Get statistics
-fastify.get('/api/stats', async (request, reply) => {
-  try {
-    const [total, completed, pending, byPriority, byCategory] =
-      await Promise.all([
-        todosCollection.countDocuments({}),
-        todosCollection.countDocuments({ completed: true }),
-        todosCollection.countDocuments({ completed: false }),
-        todosCollection
-          .aggregate([
-            { $group: { _id: '$priority', count: { $sum: 1 } } },
-            { $project: { priority: '$_id', count: 1, _id: 0 } },
-          ])
-          .toArray(),
-        todosCollection
-          .aggregate([
-            { $group: { _id: '$category', count: { $sum: 1 } } },
-            { $project: { category: '$_id', count: 1, _id: 0 } },
-          ])
-          .toArray(),
-      ]);
-
-    return {
-      total,
-      completed,
-      pending,
-      byPriority,
-      byCategory,
-    };
-  } catch (error) {
-    request.log.error(error);
-    return reply.status(500).send({ error: 'Internal server error' });
+fastify.get('/api/stats', {
+  config: {
+    rateLimit: {
+      max: 30,
+      timeWindow: '1 minute'
+    }
   }
+}, async (request, reply) => {
+  const [total, completed, pending, byPriority, byCategory] =
+    await Promise.all([
+      todosCollection.countDocuments({}),
+      todosCollection.countDocuments({ completed: true }),
+      todosCollection.countDocuments({ completed: false }),
+      todosCollection
+        .aggregate([
+          { $group: { _id: '$priority', count: { $sum: 1 } } },
+          { $project: { priority: '$_id', count: 1, _id: 0 } },
+        ])
+        .toArray(),
+      todosCollection
+        .aggregate([
+          { $group: { _id: '$category', count: { $sum: 1 } } },
+          { $project: { category: '$_id', count: 1, _id: 0 } },
+        ])
+        .toArray(),
+    ]);
+
+  return {
+    total,
+    completed,
+    pending,
+    byPriority,
+    byCategory,
+  };
 });
 
-// Error handler
-fastify.setErrorHandler((error, request, reply) => {
-  request.log.error(error);
-  reply.status(500).send({ error: 'Something went wrong!' });
-});
+// Set error handler
+fastify.setErrorHandler(errorHandler);
 
 // Start server
 async function start() {

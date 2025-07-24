@@ -3,6 +3,7 @@ import vine from '@vinejs/vine';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import rateLimit from '@fastify/rate-limit';
 
 dotenv.config();
 
@@ -17,9 +18,70 @@ const fastify = Fastify({
   logger: true,
 });
 
-// VineJS validation schemas
-const cityParamsSchema = vine.object({
-  city: vine.string().trim().minLength(1).maxLength(100),
+// Register rate limiting
+await fastify.register(rateLimit, {
+  max: 60, // 60 requests
+  timeWindow: '1 minute',
+  skipOnError: false,
+});
+
+// Centralized error handling middleware
+class AppError extends Error {
+  constructor(message, statusCode = 500, code = 'INTERNAL_ERROR') {
+    super(message);
+    this.statusCode = statusCode;
+    this.code = code;
+    this.name = 'AppError';
+  }
+}
+
+// Custom error handler
+const errorHandler = (error, request, reply) => {
+  // VineJS validation errors
+  if (error.messages) {
+    return reply.status(400).send({
+      error: 'Validation failed',
+      code: 'VALIDATION_ERROR',
+      details: error.messages,
+    });
+  }
+
+  // Custom application errors
+  if (error instanceof AppError) {
+    return reply.status(error.statusCode).send({
+      error: error.message,
+      code: error.code,
+    });
+  }
+
+  // Rate limit errors
+  if (error.statusCode === 429) {
+    return reply.status(429).send({
+      error: 'Too many requests',
+      code: 'RATE_LIMIT_EXCEEDED',
+      retryAfter: error.retryAfter,
+    });
+  }
+
+  // Weather API errors
+  if (error.message && error.message.includes('Weather API')) {
+    return reply.status(502).send({
+      error: 'Weather service temporarily unavailable',
+      code: 'WEATHER_API_ERROR',
+    });
+  }
+
+  // Default error handling
+  request.log.error(error);
+  reply.status(error.statusCode || 500).send({
+    error: error.statusCode < 500 ? error.message || 'Bad request' : 'Internal server error',
+    code: error.statusCode < 500 ? 'CLIENT_ERROR' : 'INTERNAL_ERROR',
+  });
+};
+
+// VineJS validation schemas - ZIP code only
+const zipCodeParamsSchema = vine.object({
+  zipcode: vine.string().trim().regex(/^\d{5}(-\d{4})?$/),
 });
 
 // Register static file serving
@@ -51,62 +113,43 @@ fastify.get('/settings.html', async (request, reply) => {
 
 // API Routes
 
-// Get weather data for a city
-fastify.get('/api/weather/:city', async (request, reply) => {
-  try {
-    const params = await vine.validate({
-      schema: cityParamsSchema,
-      data: request.params,
-    });
-
-    if (!OPENWEATHERMAP_API_KEY) {
-      return reply.status(500).send({
-        error: 'OpenWeatherMap API key not configured',
-      });
+// Get weather data for a ZIP code
+fastify.get('/api/weather/:zipcode', {
+  config: {
+    rateLimit: {
+      max: 30,
+      timeWindow: '1 minute'
     }
-
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(params.city)}&appid=${OPENWEATHERMAP_API_KEY}&units=metric`
-    );
-
-    if (!response.ok) {
-      if (response.status === 404) {
-        return reply.status(404).send({
-          error: 'City not found. Please check the spelling and try again.',
-        });
-      }
-      throw new Error(`Weather API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    if (error.messages) {
-      return reply.status(400).send({
-        error: 'Invalid city name',
-        details: error.messages,
-      });
-    }
-
-    request.log.error(error);
-
-    if (error.message.includes('Weather API error')) {
-      return reply.status(502).send({
-        error: 'Weather service temporarily unavailable',
-      });
-    }
-
-    return reply.status(500).send({
-      error: 'Internal server error',
-    });
   }
+}, async (request, reply) => {
+  const params = await vine.validate({
+    schema: zipCodeParamsSchema,
+    data: request.params,
+  });
+
+  if (!OPENWEATHERMAP_API_KEY) {
+    throw new AppError('OpenWeatherMap API key not configured', 500, 'API_KEY_MISSING');
+  }
+
+  // Use ZIP code format for OpenWeatherMap API
+  const zipCode = params.zipcode;
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},US&appid=${OPENWEATHERMAP_API_KEY}&units=metric`
+  );
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new AppError('ZIP code not found. Please check the ZIP code and try again.', 404, 'ZIPCODE_NOT_FOUND');
+    }
+    throw new Error(`Weather API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data;
 });
 
-// Error handler
-fastify.setErrorHandler((error, request, reply) => {
-  request.log.error(error);
-  reply.status(500).send({ error: 'Something went wrong!' });
-});
+// Set error handler
+fastify.setErrorHandler(errorHandler);
 
 // Start server
 async function start() {
