@@ -1,262 +1,308 @@
-import express from 'express';
-import sqlite3 from 'sqlite3';
-import cors from 'cors';
+import Fastify from 'fastify';
+import { MongoClient, ObjectId } from 'mongodb';
+import vine from '@vinejs/vine';
+import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express();
 const PORT = process.env.PORT || 3001;
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/todos';
 
-// Database setup
-const dbPath = path.join(__dirname, 'database', 'todos.db');
-const db = new sqlite3.Database(dbPath);
+// Create Fastify instance
+const fastify = Fastify({
+  logger: true,
+});
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// MongoDB connection
+let db;
+let todosCollection;
 
-// Initialize database
-db.serialize(() => {
-  db.run(`
-        CREATE TABLE IF NOT EXISTS todos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            text TEXT NOT NULL,
-            completed BOOLEAN DEFAULT 0,
-            priority TEXT DEFAULT 'medium',
-            category TEXT DEFAULT 'general',
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )
-    `);
+async function connectToDatabase() {
+  try {
+    const client = new MongoClient(MONGODB_URI);
+    await client.connect();
+    db = client.db();
+    todosCollection = db.collection('todos');
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+}
+
+// VineJS validation schemas
+const createTodoSchema = vine.object({
+  text: vine.string().trim().minLength(1),
+  priority: vine.enum(['high', 'medium', 'low']).optional(),
+  category: vine
+    .enum(['general', 'work', 'personal', 'shopping', 'health'])
+    .optional(),
+});
+
+const updateTodoSchema = vine.object({
+  text: vine.string().trim().minLength(1).optional(),
+  completed: vine.boolean().optional(),
+  priority: vine.enum(['high', 'medium', 'low']).optional(),
+  category: vine
+    .enum(['general', 'work', 'personal', 'shopping', 'health'])
+    .optional(),
+});
+
+const querySchema = vine.object({
+  category: vine.string().optional(),
+  completed: vine.string().optional(),
+  priority: vine.string().optional(),
+});
+
+const idParamsSchema = vine.object({
+  id: vine.string().regex(/^[0-9a-fA-F]{24}$/),
+});
+
+// Register static file serving
+await fastify.register(import('@fastify/static'), {
+  root: path.join(__dirname, 'public'),
+  prefix: '/',
 });
 
 // View Routes - Serve static HTML files
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+fastify.get('/', async (request, reply) => {
+  return reply.sendFile('index.html');
 });
 
-app.get('/analytics', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'analytics.html'));
+fastify.get('/analytics', async (request, reply) => {
+  return reply.sendFile('analytics.html');
 });
 
-app.get('/analytics.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'analytics.html'));
+fastify.get('/analytics.html', async (request, reply) => {
+  return reply.sendFile('analytics.html');
 });
 
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+fastify.get('/about', async (request, reply) => {
+  return reply.sendFile('about.html');
 });
 
-app.get('/about.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+fastify.get('/about.html', async (request, reply) => {
+  return reply.sendFile('about.html');
 });
 
 // API Routes
 
 // Get all todos
-app.get('/api/todos', (req, res) => {
-  const { category, completed, priority } = req.query;
-  let query = 'SELECT * FROM todos WHERE 1=1';
-  const params = [];
+fastify.get('/api/todos', async (request, reply) => {
+  try {
+    const query = await vine.validate({
+      schema: querySchema,
+      data: request.query,
+    });
 
-  if (category && category !== 'all') {
-    query += ' AND category = ?';
-    params.push(category);
-  }
+    const filter = {};
 
-  if (completed !== undefined) {
-    query += ' AND completed = ?';
-    params.push(completed === 'true' ? 1 : 0);
-  }
-
-  if (priority && priority !== 'all') {
-    query += ' AND priority = ?';
-    params.push(priority);
-  }
-
-  query += ' ORDER BY created_at DESC';
-
-  db.all(query, params, (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
+    if (query.category && query.category !== 'all') {
+      filter.category = query.category;
     }
-    res.json(rows);
-  });
+
+    if (query.completed !== undefined) {
+      filter.completed = query.completed === 'true';
+    }
+
+    if (query.priority && query.priority !== 'all') {
+      filter.priority = query.priority;
+    }
+
+    const todos = await todosCollection
+      .find(filter)
+      .sort({ createdAt: -1 })
+      .toArray();
+
+    return todos;
+  } catch (error) {
+    if (error.messages) {
+      return reply
+        .status(400)
+        .send({ error: 'Invalid query parameters', details: error.messages });
+    }
+    request.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
 });
 
 // Create new todo
-app.post('/api/todos', (req, res) => {
-  const { text, priority = 'medium', category = 'general' } = req.body;
-
-  if (!text || !text.trim()) {
-    res.status(400).json({ error: 'Todo text is required' });
-    return;
-  }
-
-  const query = `
-        INSERT INTO todos (text, priority, category)
-        VALUES (?, ?, ?)
-    `;
-
-  db.run(query, [text.trim(), priority, category], function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-
-    // Return the created todo
-    db.get('SELECT * FROM todos WHERE id = ?', [this.lastID], (err, row) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.status(201).json(row);
+fastify.post('/api/todos', async (request, reply) => {
+  try {
+    const data = await vine.validate({
+      schema: createTodoSchema,
+      data: request.body,
     });
-  });
+
+    const newTodo = {
+      text: data.text,
+      completed: false,
+      priority: data.priority || 'medium',
+      category: data.category || 'general',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    const result = await todosCollection.insertOne(newTodo);
+    const createdTodo = await todosCollection.findOne({
+      _id: result.insertedId,
+    });
+
+    return reply.status(201).send(createdTodo);
+  } catch (error) {
+    if (error.messages) {
+      return reply
+        .status(400)
+        .send({ error: 'Validation failed', details: error.messages });
+    }
+    request.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
 });
 
 // Update todo
-app.put('/api/todos/:id', (req, res) => {
-  const { id } = req.params;
-  const { text, completed, priority, category } = req.body;
-
-  // Build dynamic update query
-  const updates = [];
-  const params = [];
-
-  if (text !== undefined) {
-    updates.push('text = ?');
-    params.push(text.trim());
-  }
-
-  if (completed !== undefined) {
-    updates.push('completed = ?');
-    params.push(completed ? 1 : 0);
-  }
-
-  if (priority !== undefined) {
-    updates.push('priority = ?');
-    params.push(priority);
-  }
-
-  if (category !== undefined) {
-    updates.push('category = ?');
-    params.push(category);
-  }
-
-  if (updates.length === 0) {
-    res.status(400).json({ error: 'No valid fields to update' });
-    return;
-  }
-
-  updates.push('updated_at = CURRENT_TIMESTAMP');
-  params.push(id);
-
-  const query = `UPDATE todos SET ${updates.join(', ')} WHERE id = ?`;
-
-  db.run(query, params, function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-
-    if (this.changes === 0) {
-      res.status(404).json({ error: 'Todo not found' });
-      return;
-    }
-
-    // Return the updated todo
-    db.get('SELECT * FROM todos WHERE id = ?', [id], (err, row) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      res.json(row);
+fastify.put('/api/todos/:id', async (request, reply) => {
+  try {
+    const params = await vine.validate({
+      schema: idParamsSchema,
+      data: request.params,
     });
-  });
+
+    const data = await vine.validate({
+      schema: updateTodoSchema,
+      data: request.body,
+    });
+
+    if (Object.keys(data).length === 0) {
+      return reply.status(400).send({ error: 'No valid fields to update' });
+    }
+
+    const updateData = { ...data, updatedAt: new Date() };
+
+    const result = await todosCollection.updateOne(
+      { _id: new ObjectId(params.id) },
+      { $set: updateData }
+    );
+
+    if (result.matchedCount === 0) {
+      return reply.status(404).send({ error: 'Todo not found' });
+    }
+
+    const updatedTodo = await todosCollection.findOne({
+      _id: new ObjectId(params.id),
+    });
+    return updatedTodo;
+  } catch (error) {
+    if (error.messages) {
+      return reply
+        .status(400)
+        .send({ error: 'Validation failed', details: error.messages });
+    }
+    request.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
 });
 
 // Delete todo
-app.delete('/api/todos/:id', (req, res) => {
-  const { id } = req.params;
+fastify.delete('/api/todos/:id', async (request, reply) => {
+  try {
+    const params = await vine.validate({
+      schema: idParamsSchema,
+      data: request.params,
+    });
 
-  db.run('DELETE FROM todos WHERE id = ?', [id], function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
+    const result = await todosCollection.deleteOne({
+      _id: new ObjectId(params.id),
+    });
+
+    if (result.deletedCount === 0) {
+      return reply.status(404).send({ error: 'Todo not found' });
     }
 
-    if (this.changes === 0) {
-      res.status(404).json({ error: 'Todo not found' });
-      return;
+    return { message: 'Todo deleted successfully' };
+  } catch (error) {
+    if (error.messages) {
+      return reply
+        .status(400)
+        .send({ error: 'Validation failed', details: error.messages });
     }
-
-    res.json({ message: 'Todo deleted successfully' });
-  });
+    request.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
 });
 
 // Get statistics
-app.get('/api/stats', (req, res) => {
-  const queries = {
-    total: 'SELECT COUNT(*) as count FROM todos',
-    completed: 'SELECT COUNT(*) as count FROM todos WHERE completed = 1',
-    pending: 'SELECT COUNT(*) as count FROM todos WHERE completed = 0',
-    byPriority:
-      'SELECT priority, COUNT(*) as count FROM todos GROUP BY priority',
-    byCategory:
-      'SELECT category, COUNT(*) as count FROM todos GROUP BY category',
-  };
+fastify.get('/api/stats', async (request, reply) => {
+  try {
+    const [total, completed, pending, byPriority, byCategory] =
+      await Promise.all([
+        todosCollection.countDocuments({}),
+        todosCollection.countDocuments({ completed: true }),
+        todosCollection.countDocuments({ completed: false }),
+        todosCollection
+          .aggregate([
+            { $group: { _id: '$priority', count: { $sum: 1 } } },
+            { $project: { priority: '$_id', count: 1, _id: 0 } },
+          ])
+          .toArray(),
+        todosCollection
+          .aggregate([
+            { $group: { _id: '$category', count: { $sum: 1 } } },
+            { $project: { category: '$_id', count: 1, _id: 0 } },
+          ])
+          .toArray(),
+      ]);
 
-  const stats = {};
-  let completed = 0;
-  const total = Object.keys(queries).length;
-
-  Object.entries(queries).forEach(([key, query]) => {
-    db.all(query, [], (err, rows) => {
-      if (err) {
-        console.error(`Error executing ${key} query:`, err);
-        return;
-      }
-
-      if (key === 'byPriority' || key === 'byCategory') {
-        stats[key] = rows;
-      } else {
-        stats[key] = rows[0].count;
-      }
-
-      completed++;
-      if (completed === total) {
-        res.json(stats);
-      }
-    });
-  });
+    return {
+      total,
+      completed,
+      pending,
+      byPriority,
+      byCategory,
+    };
+  } catch (error) {
+    request.log.error(error);
+    return reply.status(500).send({ error: 'Internal server error' });
+  }
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
+// Error handler
+fastify.setErrorHandler((error, request, reply) => {
+  request.log.error(error);
+  reply.status(500).send({ error: 'Something went wrong!' });
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Todo API server running on http://localhost:${PORT}`);
-});
+async function start() {
+  try {
+    await connectToDatabase();
+    await fastify.listen({ port: PORT, host: '0.0.0.0' });
+    console.log(`Todo API server running on http://localhost:${PORT}`);
+  } catch (error) {
+    fastify.log.error(error);
+    process.exit(1);
+  }
+}
 
 // Graceful shutdown
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   console.log('\nShutting down server...');
-  db.close(err => {
-    if (err) {
-      console.error(err.message);
-    } else {
+  try {
+    await fastify.close();
+    if (db) {
+      await db.client.close();
       console.log('Database connection closed.');
     }
-    process.exit(0);
-  });
+  } catch (error) {
+    console.error('Error during shutdown:', error);
+  }
+  process.exit(0);
 });
+
+start();

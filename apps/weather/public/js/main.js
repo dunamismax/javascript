@@ -1,5 +1,5 @@
-import { ApiClient } from '@dunamismax/utils/api.js';
-import { $, $$, createElement } from '@dunamismax/utils/dom.js';
+import { ApiClient } from '@dunamismax/utils/api';
+import { $, $$, createElement } from '@dunamismax/utils/dom';
 
 class WeatherApp {
   constructor() {

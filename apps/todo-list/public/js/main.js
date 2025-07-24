@@ -1,5 +1,5 @@
-import { ApiClient } from '@dunamismax/utils/api.js';
-import { $, $$, createElement, escapeHtml } from '@dunamismax/utils/dom.js';
+import { ApiClient } from '@dunamismax/utils/api';
+import { $, $$, createElement, escapeHtml } from '@dunamismax/utils/dom';
 
 class TodoApp {
   constructor() {

@@ -14,7 +14,7 @@ export function formatNextDocument(html) {
 export function replaceBody(nextDoc) {
   const nodesToPreserve = document.body.querySelectorAll('[flare-preserve]');
   nodesToPreserve.forEach((oldDocElement) => {
-    const nextDocElement = nextDoc.body.querySelector(`[flare-preserve][id="${  oldDocElement.id  }"]`);
+    const nextDocElement = nextDoc.body.querySelector(`[flare-preserve][id="${oldDocElement.id}"]`);
     if (nextDocElement) {
       const clone = oldDocElement.cloneNode(true);
       nextDocElement.replaceWith(clone);

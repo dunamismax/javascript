@@ -1,0 +1,27 @@
+[Unit]
+Description=Weather Application
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/javascript-apps/weather
+Environment=NODE_ENV=production
+Environment=PORT=3000
+EnvironmentFile=/opt/javascript-apps/weather/.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=weather-app
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/javascript-apps/weather/logs
+
+[Install]
+WantedBy=multi-user.target

@@ -1,83 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <header class="header">
-            <h1>Weather Dashboard</h1>
-            <nav class="navigation">
-                <a href="/" class="active">Dashboard</a>
-                <a href="/about.html">About</a>
-                <a href="/settings.html">Settings</a>
-            </nav>
-            <div class="search-container">
-                <input type="text" id="cityInput" placeholder="Enter city name..." />
-                <button id="searchBtn">Search</button>
-            </div>
-        </header>
+      <header class="header">
+        <h1>Weather Dashboard</h1>
+        <nav class="navigation">
+          <a href="/" class="active">Dashboard</a>
+          <a href="/about.html">About</a>
+          <a href="/settings.html">Settings</a>
+        </nav>
+        <div class="search-container">
+          <input type="text" id="cityInput" placeholder="Enter city name..." />
+          <button id="searchBtn">Search</button>
+        </div>
+      </header>
 
-        <main class="main-content">
-            <div id="weatherCard" class="weather-card hidden">
-                <div class="current-weather">
-                    <div class="location">
-                        <h2 id="cityName"></h2>
-                        <p id="country"></p>
-                    </div>
-                    <div class="temperature">
-                        <span id="temp"></span>
-                        <span class="unit">°C</span>
-                    </div>
-                    <div class="weather-info">
-                        <div class="weather-icon">
-                            <img id="weatherIcon" alt="Weather icon" />
-                        </div>
-                        <div class="weather-details">
-                            <p id="description"></p>
-                            <p id="feelsLike"></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="additional-info">
-                    <div class="info-item">
-                        <span class="label">Humidity</span>
-                        <span id="humidity"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Wind Speed</span>
-                        <span id="windSpeed"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Pressure</span>
-                        <span id="pressure"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Visibility</span>
-                        <span id="visibility"></span>
-                    </div>
-                </div>
+      <main class="main-content">
+        <div id="weatherCard" class="weather-card hidden">
+          <div class="current-weather">
+            <div class="location">
+              <h2 id="cityName"></h2>
+              <p id="country"></p>
             </div>
+            <div class="temperature">
+              <span id="temp"></span>
+              <span class="unit">°C</span>
+            </div>
+            <div class="weather-info">
+              <div class="weather-icon">
+                <img id="weatherIcon" alt="Weather icon" />
+              </div>
+              <div class="weather-details">
+                <p id="description"></p>
+                <p id="feelsLike"></p>
+              </div>
+            </div>
+          </div>
 
-            <div id="errorMessage" class="error-message hidden">
-                <p>City not found. Please try again.</p>
+          <div class="additional-info">
+            <div class="info-item">
+              <span class="label">Humidity</span>
+              <span id="humidity"></span>
             </div>
+            <div class="info-item">
+              <span class="label">Wind Speed</span>
+              <span id="windSpeed"></span>
+            </div>
+            <div class="info-item">
+              <span class="label">Pressure</span>
+              <span id="pressure"></span>
+            </div>
+            <div class="info-item">
+              <span class="label">Visibility</span>
+              <span id="visibility"></span>
+            </div>
+          </div>
+        </div>
 
-            <div id="loadingSpinner" class="loading hidden">
-                <div class="spinner"></div>
-                <p>Loading weather data...</p>
-            </div>
-        </main>
+        <div id="errorMessage" class="error-message hidden">
+          <p>City not found. Please try again.</p>
+        </div>
+
+        <div id="loadingSpinner" class="loading hidden">
+          <div class="spinner"></div>
+          <p>Loading weather data...</p>
+        </div>
+      </main>
     </div>
 
     <script type="module">
-        import flare from '/js/flare-router.js';
-        const router = flare({ prefetch: 'visible', log: true });
+      import flare from '/js/flare-router.js';
+      const router = flare({ prefetch: 'visible', log: true });
     </script>
     <script src="/js/main.js"></script>
-</body>
+  </body>
 </html>

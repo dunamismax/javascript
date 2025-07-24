@@ -54,7 +54,7 @@ function L(o) {
 }
 function g(o) {
   (document.body.querySelectorAll('[flare-preserve]').forEach(t => {
-    const n = o.body.querySelector(`[flare-preserve][id="${  t.id  }"]`);
+    const n = o.body.querySelector(`[flare-preserve][id="${t.id}"]`);
     if (n) {
       const r = t.cloneNode(!0);
       n.replaceWith(r);
@@ -140,7 +140,7 @@ class T {
       e =>
         e.href.includes(document.location.origin) &&
         !e.href.includes('#') &&
-        e.href !== (document.location.href || `${document.location.href  }/`) &&
+        e.href !== (document.location.href || `${document.location.href}/`) &&
         !this.prefetched.has(e.href)
     );
   }

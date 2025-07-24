@@ -1,20 +1,31 @@
 {
   "name": "@dunamismax/weather-app",
-  "version": "1.0.0",
-  "description": "Weather dashboard built with Express.js and vanilla HTML",
+  "version": "2.0.0",
+  "description": "Weather dashboard built with Fastify and vanilla HTML",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "node build.js",
+    "build:dev": "node build.js --dev",
+    "clean": "rm -rf dist",
+    "preview": "pnpm build && pnpm start"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "fastify": "^4.24.3",
+    "@fastify/static": "^7.0.1",
+    "@vinejs/vine": "^1.7.1",
     "dotenv": "^16.4.5",
-    "@dunamismax/utils": "*",
-    "@dunamismax/flare-router": "*"
+    "@dunamismax/utils": "workspace:*",
+    "@dunamismax/flare-router": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.12",
+    "nodemon": "^3.0.3"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
   }
 }
