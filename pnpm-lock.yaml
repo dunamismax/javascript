@@ -2349,7 +2349,7 @@ packages:
   safe-regex2@3.1.0:
     resolution:
       {
-        integrity: sha512-RAAZAGbap2kBfbVhvmnTFv73NWLMvDGOITFYTZBAaY8eR+Ir4ef7Up/e7amo+y1+AH+3PtLkrt9mvcTsG9LXug==,
+        integrity: sha512-RAAZAGbap3.4kBfbVhvmnTFv73NWLMvDGOITFYTZBAaY8eR+Ir4ef7Up/e7amo+y1+AH+3PtLkrt9mvcTsG9LXug==,
       }
 
   safe-stable-stringify@2.5.0:

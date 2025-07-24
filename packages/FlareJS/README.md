@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/dunamismax/FlareJS">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=FF6B35&center=true&vCenter=true&width=1000&lines=FlareJS+Router+%2B+2kB+Bundle+Size;Lightning-Fast+SPA+Navigation;Zero+Configuration+Setup;Intelligent+Link+Prefetching;Static+Sites+Feel+Like+SPAs;IntersectionObserver+Prefetch;Long-Lived+JavaScript+State;Framework+Agnostic+Solution;Vanilla+JavaScript+Power;Turbo-Inspired+Architecture;Production+Ready+Router;Blazingly+Fast+Performance;Modern+Browser+APIs;Zero+Dependencies+Required;Drop-In+Solution" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=FF6B35&center=true&vCenter=true&width=1000&lines=FlareJS+Router+%2B+3.4kB+Bundle+Size;Lightning-Fast+SPA+Navigation;Zero+Configuration+Setup;Intelligent+Link+Prefetching;Static+Sites+Feel+Like+SPAs;IntersectionObserver+Prefetch;Long-Lived+JavaScript+State;Framework+Agnostic+Solution;Vanilla+JavaScript+Power;Turbo-Inspired+Architecture;Production+Ready+Router;Blazingly+Fast+Performance;Modern+Browser+APIs;Zero+Dependencies+Required;Drop-In+Solution" alt="Typing SVG" />
   </a>
 </p>
 
@@ -21,11 +21,11 @@
 
 # FlareJS Router 🔥
 
-A **2kB zero-config router** and intelligent prefetcher that makes static sites feel like blazingly fast SPAs. Transform any multi-page website into a lightning-fast experience without framework overhead.
+A **3.4kB zero-config router** and intelligent prefetcher that makes static sites feel like blazingly fast SPAs. Transform any multi-page website into a lightning-fast experience without framework overhead.
 
 ## Features
 
-- **Ultra-Lightweight** - Only 2kB gzipped bundle size
+- **Ultra-Lightweight** - Only 3.4kB gzipped bundle size
 - **Zero Configuration** - Works out of the box with any static site
 - **Intelligent Prefetching** - Automatic link prefetching with IntersectionObserver
 - **SPA-like Navigation** - Instant page transitions without full reloads
@@ -277,7 +277,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <p align="center">
   <strong>FlareJS Router - Lightning-Fast Navigation for Static Sites</strong><br>
-  <sub>2kB Bundle • Zero Config • Intelligent Prefetching • Framework Agnostic • Vanilla JavaScript</sub>
+  <sub>3.4kB Bundle • Zero Config • Intelligent Prefetching • Framework Agnostic • Vanilla JavaScript</sub>
 </p>
 
 <p align="center">

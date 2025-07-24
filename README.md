@@ -4,12 +4,12 @@
 
 <p align="center">
   <a href="https://github.com/dunamismax/javascript">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Full-Stack+Vanilla+JavaScript+Monorepo;FlareJS+Router+%2B+2kB+Lightning+Fast+SPA;Intelligent+Link+Prefetching+%2B+Zero+Config;Vanilla+HTML%2BCSS%2BJS+%2B+Node.js+%2B+Fastify;MongoDB+Native+Driver+%2B+VineJS+Validation;pnpm+Workspaces+%2B+esbuild+Bundling;Zero+Framework+Dependencies;Lightning+Fast+Performance;Production+Ready+%2B+Secure;Real-World+Applications;systemd+%2B+Caddy+%2B+HTTPS;Enterprise+Grade+Architecture;Maximum+Performance+Control;Modern+Development+Experience;Complete+Tech+Stack;4-Step+Development+Setup;Monorepo+Package+Architecture;Environment+Config+%2B+dotenv;GitHub+Actions+CI%2FCD+Pipeline;MIT+Licensed+Open+Source" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Full-Stack+Vanilla+JavaScript+Monorepo;FlareJS+Router+%2B+3.4kB+Lightning+Fast+SPA;Intelligent+Link+Prefetching+%2B+Zero+Config;Vanilla+HTML%2BCSS%2BJS+%2B+Node.js+%2B+Fastify;MongoDB+Native+Driver+%2B+VineJS+Validation;pnpm+Workspaces+%2B+esbuild+Bundling;Zero+Framework+Dependencies;Lightning+Fast+Performance;Production+Ready+%2B+Secure;Real-World+Applications;systemd+%2B+Caddy+%2B+HTTPS;Enterprise+Grade+Architecture;Maximum+Performance+Control;Modern+Development+Experience;Complete+Tech+Stack;4-Step+Development+Setup;Monorepo+Package+Architecture;Environment+Config+%2B+dotenv;GitHub+Actions+CI%2FCD+Pipeline;MIT+Licensed+Open+Source" alt="Typing SVG" />
   </a>
 </p>
 
 <p align="center">
-  <a href="#-flarejs-router---the-heart-of-lightning-fast-navigation"><img src="https://img.shields.io/badge/FlareJS_Router-2kB-FF6B35.svg" alt="FlareJS Router"></a>
+  <a href="#-flarejs-router---the-heart-of-lightning-fast-navigation"><img src="https://img.shields.io/badge/FlareJS_Router-3.4kB-FF6B35.svg" alt="FlareJS Router"></a>
   <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18+-339933.svg?logo=node.js" alt="Node.js Version"></a>
   <a href="https://fastify.dev/"><img src="https://img.shields.io/badge/Fastify-4.29+-000000.svg?logo=fastify" alt="Fastify Version"></a>
   <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-6.18+-47A248.svg?logo=mongodb" alt="MongoDB Version"></a>
@@ -28,11 +28,11 @@
 
 # Full-Stack Vanilla JavaScript Monorepo
 
-A production-ready JavaScript monorepo featuring **FlareJS Router** - a blazingly fast 2kB SPA router with intelligent prefetching. Built with vanilla HTML, CSS, and JavaScript frontend, Node.js, Fastify, and MongoDB backend. Experience lightning-fast navigation that makes static sites feel like modern SPAs with zero configuration and maximum performance.
+A production-ready JavaScript monorepo featuring **FlareJS Router** - a blazingly fast 3.4kB SPA router with intelligent prefetching. Built with vanilla HTML, CSS, and JavaScript frontend, Node.js, Fastify, and MongoDB backend. Experience lightning-fast navigation that makes static sites feel like modern SPAs with zero configuration and maximum performance.
 
 ## Features
 
-- **🔥 FlareJS Router** - Lightning-fast 2kB router with intelligent prefetching, IntersectionObserver, and SPA-like navigation
+- **🔥 FlareJS Router** - Lightning-fast 3.4kB router with intelligent prefetching, IntersectionObserver, and SPA-like navigation
 - **⚡ Zero-Config Performance** - Instant page transitions, state preservation, and enhanced user experience
 - **🏗️ Modern Full-Stack Architecture** with Fastify backend, MongoDB database, and VineJS validation
 - **🎨 Vanilla Frontend Experience** with HTML, CSS, JavaScript, and zero framework overhead
@@ -48,7 +48,7 @@ A production-ready JavaScript monorepo featuring **FlareJS Router** - a blazingl
 │   ├── todo-list/             # Full-stack todo app with MongoDB
 │   └── weather/               # Weather dashboard with API integration
 ├── packages/
-│   ├── FlareJS/               # 🔥 2kB SPA router with intelligent prefetching
+│   ├── FlareJS/               # 🔥 3.4kB SPA router with intelligent prefetching
 │   ├── utils/                 # API client, DOM helpers, storage utilities
 │   ├── ui-components/         # CSS design system with dark/light themes
 │   └── config/                # Shared ESLint, Prettier configurations
@@ -89,12 +89,12 @@ pnpm dev
 
 ## 🔥 FlareJS Router - The Heart of Lightning-Fast Navigation
 
-FlareJS is the custom-built 2kB router that powers both applications in this monorepo, transforming static websites into blazingly fast Single Page Applications. Experience the future of web navigation with zero configuration.
+FlareJS is the custom-built 3.4kB router that powers both applications in this monorepo, transforming static websites into blazingly fast Single Page Applications. Experience the future of web navigation with zero configuration.
 
 ### ✨ Key Features
 
 - **🎯 Zero Configuration** - Works out of the box with any static site
-- **⚡ Lightning Fast** - Only 2kB gzipped, faster than traditional frameworks
+- **⚡ Lightning Fast** - Only 3.4kB gzipped, faster than traditional frameworks
 - **🧠 Intelligent Prefetching** - Uses IntersectionObserver to prefetch visible links automatically
 - **🔄 State Preservation** - JavaScript state persists between page navigations
 - **📱 SPA Experience** - Instant page transitions without full reloads
@@ -119,7 +119,7 @@ const router = flare({ prefetch: 'visible', log: true });
 
 Traditional frameworks add hundreds of KB and complex abstractions. FlareJS gives you the performance benefits of SPAs with vanilla simplicity:
 
-- **Next.js**: ~300KB+ bundle size vs **FlareJS**: 2KB
+- **Next.js**: ~300KB+ bundle size vs **FlareJS**: 3.4kB
 - **React Router**: Requires React ecosystem vs **FlareJS**: Works with any HTML
 - **Vue Router**: Framework coupling vs **FlareJS**: Framework agnostic
 - **Traditional MPAs**: Full page reloads vs **FlareJS**: Instant transitions
@@ -132,12 +132,12 @@ Traditional frameworks add hundreds of KB and complex abstractions. FlareJS give
 | Navigation Speed | Full reload        | Instant            |
 | JavaScript State | Lost on navigation | Preserved          |
 | User Experience  | Page flickers      | Smooth transitions |
-| Bundle Size      | N/A                | 2kB                |
+| Bundle Size      | N/A                | 3.4kB              |
 | Configuration    | N/A                | Zero config        |
 
 ## Tech Stack
 
-**🔥 FlareJS Router:** 2kB zero-config SPA router with intelligent prefetching and IntersectionObserver
+**🔥 FlareJS Router:** 3.4kB zero-config SPA router with intelligent prefetching and IntersectionObserver
 **Core:** Node.js 18+, Vanilla JavaScript ES Modules, Fastify, MongoDB Native Driver
 **Frontend:** Vanilla HTML, CSS with design system, JavaScript DOM manipulation, lightning-fast navigation
 **Shared:** VineJS validation, API client utilities, storage management, CSS custom properties
@@ -148,7 +148,7 @@ Traditional frameworks add hundreds of KB and complex abstractions. FlareJS give
 
 **Monorepo Structure:** pnpm workspaces with shared packages and independent applications
 
-- **🔥 `@dunamismax/flare-router`** - Lightning-fast 2kB router with intelligent prefetching, zero configuration, and SPA-like navigation
+- **🔥 `@dunamismax/flare-router`** - Lightning-fast 3.4kB router with intelligent prefetching, zero configuration, and SPA-like navigation
 - **🛠️ `@dunamismax/utils`** - API client, DOM helpers, storage utilities, performance tools
 - **🎨 `@dunamismax/ui-components`** - CSS design system with dark/light themes and comprehensive variables
 - **⚙️ `@dunamismax/config`** - Shared ESLint, Prettier, and development configurations
@@ -184,7 +184,7 @@ pnpm start            # Start all applications in production mode
 
 ## Key Features
 
-**🔥 FlareJS Performance:** 2kB router with intelligent prefetching makes static sites feel like blazingly fast SPAs
+**🔥 FlareJS Performance:** 3.4kB router with intelligent prefetching makes static sites feel like blazingly fast SPAs
 **⚡ Ultra-High Performance:** Fastify backend (2-3x faster than Express), MongoDB native driver, esbuild bundling (10-100x faster), vanilla frontend with zero framework overhead
 
 **Enterprise Security:** VineJS validation with detailed error messages, input sanitization and XSS protection, environment isolation, OWASP-compliant security headers
@@ -373,7 +373,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <p align="center">
   <strong>Full-Stack Vanilla JavaScript Monorepo with FlareJS Router</strong><br>
-  <sub>🔥 FlareJS 2kB Router • Vanilla JS • Node.js • Fastify • MongoDB • Lightning-Fast SPA Navigation</sub>
+  <sub>🔥 FlareJS 3.4kB Router • Vanilla JS • Node.js • Fastify • MongoDB • Lightning-Fast SPA Navigation</sub>
 </p>
 
 <p align="center">
