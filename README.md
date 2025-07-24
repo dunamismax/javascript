@@ -152,6 +152,8 @@ pnpm format:check     # Check code formatting
 pnpm start            # Start all applications in production mode
 ```
 
+---
+
 <p align="center">
   <img src="https://github.com/dunamismax/images/blob/main/javascript/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="450" />
 </p>
@@ -226,12 +228,6 @@ pnpm start    # Start in production mode
 5. Submit pull request with clear description
 
 **Code Style:** Uses ESLint and Prettier with shared configurations from `@dunamismax/config`
-
-## Author
-
-<img src="https://gravatar.com/nachounabashed3164d5c433" alt="dunamismax" width="80" style="border-radius: 50%;" />
-
-**dunamismax** - Creator and maintainer of this full-stack JavaScript monorepo and the flare-router.
 
 ## License
 
