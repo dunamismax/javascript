@@ -1,25 +1,23 @@
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/Vanilla-JS-Logo.png" alt="FlareJS Router" width="200" />
+  <img src="https://github.com/dunamismax/images/blob/main/Vanilla-JS-Logo.png" alt="flare-router" width="200" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/dunamismax/FlareJS">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=FF6B35&center=true&vCenter=true&width=1000&lines=FlareJS+Router+%2B+3.4kB+Bundle+Size;Lightning-Fast+SPA+Navigation;Zero+Configuration+Setup;Intelligent+Link+Prefetching;Static+Sites+Feel+Like+SPAs;IntersectionObserver+Prefetch;Long-Lived+JavaScript+State;Framework+Agnostic+Solution;Vanilla+JavaScript+Power;Turbo-Inspired+Architecture;Production+Ready+Router;Blazingly+Fast+Performance;Modern+Browser+APIs;Zero+Dependencies+Required;Drop-In+Solution" alt="Typing SVG" />
+  <a href="https://github.com/dunamismax/flare-router">
+ <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=FF6B35&center=true&vCenter=true&width=1000&lines=flare-router+Router+%2B+3.4kB+Bundle+Size;Lightning-Fast+SPA+Navigation;Zero+Configuration+Setup;Intelligent+Link+Prefetching;Static+Sites+Feel+Like+SPAs;IntersectionObserver+Prefetch;Long-Lived+JavaScript+State;Framework+Agnostic+Solution;Vanilla+JavaScript+Power;Turbo-Inspired+Architecture;Production+Ready+Router;Blazingly+Fast+Performance;Modern+Browser+APIs;Zero+Dependencies+Required;Drop-In+Solution" alt="Typing SVG" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/flare-router"><img src="https://img.shields.io/npm/v/flare-router.svg?color=FF6B35" alt="npm version"></a>
-  <a href="https://www.npmjs.com/package/flare-router"><img src="https://img.shields.io/npm/dm/flare-router.svg?color=FF6B35" alt="npm downloads"></a>
-  <a href="https://bundlephobia.com/package/flare-router"><img src="https://img.shields.io/bundlephobia/minzip/flare-router?color=FF6B35" alt="Bundle Size"></a>
+  <a href="https://github.com/dunamismax/flare-router"><img src="https://img.shields.io/badge/Bundle_Size-3.4kB-FF6B35.svg" alt="Bundle Size"></a>
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/Vanilla_JS-ES2020+-F7DF1E.svg?logo=javascript" alt="Vanilla JS"></a>
-  <a href="https://playwright.dev/"><img src="https://img.shields.io/badge/Tests-Playwright-45ba4b.svg?logo=playwright" alt="Playwright"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
+  <a href="https://github.com/dunamismax/flare-router"><img src="https://img.shields.io/github/stars/dunamismax/flare-router?style=social" alt="GitHub stars"></a>
 </p>
 
 ---
 
-# FlareJS Router 🔥
+# flare-router 🔥
 
 A **3.4kB zero-config router** and intelligent prefetcher that makes static sites feel like blazingly fast SPAs. Transform any multi-page website into a lightning-fast experience without framework overhead.
 
@@ -42,9 +40,8 @@ A **3.4kB zero-config router** and intelligent prefetcher that makes static site
 │   ├── handlers.js            # Click and popstate event handlers
 │   └── dom.js                 # DOM manipulation and head merging
 ├── example/                   # Example implementation
-├── test/                      # Playwright test suite
-├── dist/                      # Built bundles (ES modules + UMD)
-└── Configuration files        # Vite, Playwright, package.json
+├── dist/                      # Built bundles
+└── package.json               # Package configuration
 ```
 
 ---
@@ -60,7 +57,7 @@ A **3.4kB zero-config router** and intelligent prefetcher that makes static site
 ### Get Running in 3 Steps
 
 ```bash
-# 1. Install FlareJS Router
+# 1. Install flare-router
 npm install flare-router
 
 # 2. Import and initialize
@@ -99,18 +96,13 @@ const router = flare();
 
 ## Tech Stack
 
-**Core:** Vanilla JavaScript ES Modules, IntersectionObserver API, Fetch API, History API  
-**Build:** Vite bundler with ES modules and UMD outputs  
-**Testing:** Playwright for cross-browser testing  
+**Core:** Vanilla JavaScript ES Modules, IntersectionObserver API, Fetch API, History API
+**Build:** esbuild for bundling
 **Deployment:** npm package with CDN support
-
-<p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="450" />
-</p>
 
 ## Architecture
 
-**How FlareJS Works:**
+**How flare-router Works:**
 
 1. **Intelligent Prefetching** - Uses IntersectionObserver to detect visible links and prefetches them
 2. **Event Interception** - Captures click and popstate events for seamless navigation
@@ -120,17 +112,8 @@ const router = flare();
 ## Development Scripts
 
 ```bash
-# Development
-npm run dev           # Build in watch mode with Vite
-npm run build         # Build production bundles
-npm run serve         # Serve example application
-
-# Testing
-npm test              # Run Playwright test suite
-npm run test:headed   # Run tests with browser UI
-
-# Deployment
-npm run deploy        # Deploy example to Vercel
+# Build production bundles
+npm run build
 ```
 
 ## Advanced Usage
@@ -183,6 +166,10 @@ window.addEventListener('flare:router:end', () => {
 <!-- Force head scripts to reload -->
 <script src="/analytics.js" data-reload></script>
 ```
+
+<p align="center">
+  <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="450" />
+</p>
 
 ## Code Examples
 
@@ -244,13 +231,12 @@ window.addEventListener('flare:router:fetch-progress', ({ detail }) => {
 
 1. Fork and create feature branch
 2. Make changes following existing patterns
-3. Run `npm run build && npm test`
+3. Run `npm run build`
 4. Submit pull request
 
 **Development Workflow:**
 
-- Uses Vite for fast development builds
-- Playwright for comprehensive browser testing
+- Uses esbuild for fast development builds
 - ESLint and Prettier for code quality
 
 ## License
@@ -261,7 +247,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <p align="center">
   <a href="https://www.buymeacoffee.com/dunamismax">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
+ <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
   </a>
 </p>
 
@@ -276,7 +262,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ---
 
 <p align="center">
-  <strong>FlareJS Router - Lightning-Fast Navigation for Static Sites</strong><br>
+  <strong>flare-router Router - Lightning-Fast Navigation for Static Sites</strong><br>
   <sub>3.4kB Bundle • Zero Config • Intelligent Prefetching • Framework Agnostic • Vanilla JavaScript</sub>
 </p>
 

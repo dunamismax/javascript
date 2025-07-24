@@ -55,7 +55,7 @@ export class Router {
       (node) =>
         node.href.includes(document.location.origin) && // on origin url
         !node.href.includes('#') && // not an id anchor
-        node.href !== (document.location.href || `${document.location.href}/`) && // not current page
+        node.href !== (document.location.href || document.location.href + '/') && // not current page
         !this.prefetched.has(node.href), // not already prefetched
     );
   }
@@ -99,23 +99,21 @@ export class Router {
     };
 
     if ('IntersectionObserver' in window) {
-      this.observer =
-        this.observer ||
-        new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            const url = entry.target.getAttribute('href');
+      this.observer = this.observer || new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          const url = entry.target.getAttribute('href');
 
-            if (this.prefetched.has(url)) {
-              observer.unobserve(entry.target);
-              return;
-            }
+          if (this.prefetched.has(url)) {
+            observer.unobserve(entry.target);
+            return;
+          }
 
-            if (entry.isIntersecting) {
-              this.createLink(url);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, intersectionOpts);
+          if (entry.isIntersecting) {
+            this.createLink(url);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, intersectionOpts);
       this.allLinks.forEach((node) => this.observer.observe(node));
     }
   }
@@ -131,7 +129,7 @@ export class Router {
     linkEl.as = 'document';
 
     linkEl.onload = () => this.log('🌩️ prefetched', url);
-    linkEl.onerror = (err) => this.log("🤕 can't prefetch", url, err);
+    linkEl.onerror = (err) => this.log('🤕 can\'t prefetch', url, err);
 
     document.head.appendChild(linkEl);
 
@@ -243,6 +241,7 @@ export class Router {
           runScripts();
           scrollTo(type, scrollId);
         }
+
 
         window.dispatchEvent(new CustomEvent('flare:router:end'));
 
