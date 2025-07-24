@@ -92,10 +92,6 @@ pnpm dev
 **Tools:** esbuild bundling, ESLint, Prettier, pnpm workspaces, environment management
 **Deployment:** Linux, systemd process management, Caddy reverse proxy with automatic HTTPS
 
-<p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="450" />
-</p>
-
 ## Architecture
 
 **Monorepo Structure:** pnpm workspaces with shared packages and independent applications
@@ -129,6 +125,10 @@ pnpm format:check     # Check code formatting
 # Production
 pnpm start            # Start all applications in production mode
 ```
+
+<p align="center">
+  <img src="https://github.com/dunamismax/images/blob/main/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="450" />
+</p>
 
 ## Key Features
 
