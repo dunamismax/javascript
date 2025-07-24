@@ -32,13 +32,10 @@ function processHTMLFiles() {
 
     let html = readFileSync(htmlPath, 'utf8');
 
-    // Update asset paths to use bundled versions
-    html = html.replace(/href="css\/styles\.css"/, 'href="css/styles.min.css"');
-    html = html.replace(/src="js\/main\.js"/, 'src="js/main.min.js"');
-    html = html.replace(
-      /src="js\/flare-router\.js"/,
-      'src="js/flare-router.min.js"'
-    );
+    // Update asset paths to use bundled versions  
+    html = html.replace(/href="\/css\/styles\.css"/, 'href="css/styles.min.css"');
+    html = html.replace(/src="\/js\/main\.js"/, 'src="js/main.min.js"');
+    // FlareJS is now imported as ES module, no need to replace it
 
     writeFileSync(distHtmlPath, html, 'utf8');
     console.log(`✓ Processed ${htmlFile}`);
@@ -49,7 +46,6 @@ function processHTMLFiles() {
 async function bundleJS() {
   const jsFiles = [
     { input: 'js/main.js', output: 'js/main.min.js' },
-    { input: 'js/flare-router.js', output: 'js/flare-router.min.js' },
   ];
 
   for (const { input, output } of jsFiles) {
