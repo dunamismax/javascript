@@ -1,4 +1,5 @@
 import type { CreateTodo, Todo, TodoFilters, UpdateTodo } from "./types.ts";
+import { v4 } from "@std/uuid";
 
 export class TodoDatabase {
   private kv: Deno.Kv;
@@ -24,7 +25,7 @@ export class TodoDatabase {
   }
 
   async createTodo(data: CreateTodo): Promise<Todo> {
-    const id = crypto.randomUUID();
+    const id = v4.generate();
     const now = new Date();
 
     const todo: Todo = {

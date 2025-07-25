@@ -6,7 +6,12 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
-    "update": "deno run -A -r jsr:@fresh/update ."
+    "update": "deno run -A -r jsr:@fresh/update .",
+    "compile": "deno compile -A --output=./bin/citrus-press main.ts",
+    "compile:docker": "deno compile -A --target=x86_64-unknown-linux-gnu --output=./bin/citrus-press-linux main.ts",
+    "bundle": "deno bundle main.ts ./dist/citrus-press.js",
+    "test": "deno test --allow-all",
+    "test:watch": "deno test --allow-all --watch"
   },
   "lint": {
     "rules": {
@@ -20,21 +25,28 @@
     "**/_fresh/*"
   ],
   "imports": {
-    "fresh": "jsr:@fresh/core@2.0.0-alpha.34",
-    "fresh/": "jsr:@fresh/core@2.0.0-alpha.34/",
-    "fresh/dev": "jsr:@fresh/core@2.0.0-alpha.34/dev",
-    "fresh/runtime": "jsr:@fresh/core@2.0.0-alpha.34/runtime",
-    "preact": "npm:preact@10.25.0",
-    "preact/": "npm:preact@10.25.0/",
-    "preact/jsx-runtime": "npm:preact@10.25.0/jsx-runtime",
-    "preact/hooks": "npm:preact@10.25.0/hooks",
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "preact": "https://esm.sh/preact@10.19.6",
+    "preact/": "https://esm.sh/preact@10.19.6/",
+    "preact/jsx-runtime": "https://esm.sh/preact@10.19.6/jsx-runtime",
+    "preact/hooks": "https://esm.sh/preact@10.19.6/hooks",
+    "preact/debug": "https://esm.sh/preact@10.19.6/debug",
     "@preact/signals": "npm:@preact/signals@1.2.2",
     "@preact/signals-core": "npm:@preact/signals-core@1.5.1",
     "tailwindcss": "npm:tailwindcss@3.4.1",
     "tailwindcss/": "npm:tailwindcss@3.4.1/",
     "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js",
-    "@std/": "jsr:@std/assert@^1.0.0/",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.0",
+    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "@std/http": "jsr:@std/http@^1.0.0",
+    "@std/fmt": "jsr:@std/fmt@^1.0.0",
+    "@std/fs": "jsr:@std/fs@^1.0.0",
+    "@std/path": "jsr:@std/path@^1.0.0",
+    "@std/encoding": "jsr:@std/encoding@^1.0.0",
+    "@std/crypto": "jsr:@std/crypto@^1.0.0",
+    "@std/uuid": "jsr:@std/uuid@^1.0.0",
+    "@std/datetime": "jsr:@std/datetime@^0.225.0",
+    "@std/json": "jsr:@std/json@^1.0.0",
     "valibot": "jsr:@valibot/valibot@^1.1.0"
   },
   "compilerOptions": {
@@ -42,7 +54,8 @@
     "jsxImportSource": "preact",
     "strict": true,
     "noImplicitAny": true,
-    "exactOptionalPropertyTypes": true
+    "exactOptionalPropertyTypes": true,
+    "lib": ["deno.window", "deno.unstable"]
   },
   "nodeModulesDir": "auto"
 }

@@ -1,5 +1,5 @@
-import { Head } from "fresh/runtime";
-import { type Handlers, type PageProps } from "fresh";
+import { Head } from "$fresh/runtime.ts";
+import { type Handlers, type PageProps } from "$fresh/server.ts";
 import { getDatabase } from "../../lib/db.ts";
 import {
   Todo,

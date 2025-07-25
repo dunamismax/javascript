@@ -1,13 +1,13 @@
-import { Head } from "fresh/runtime";
+import { Head } from "$fresh/runtime.ts";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Deno Fresh Application</title>
+        <title>Citrus Press - Deno Fresh Application</title>
         <meta
           name="description"
-          content="A modern full-stack application built with Deno 2 and Fresh 1.7.3"
+          content="A modern full-stack application built with Deno 2 and Fresh"
         />
       </Head>
 
@@ -19,16 +19,16 @@ export default function Home() {
                 Deno Fresh Application
               </h1>
               <p class="text-xl text-white/80 mb-8">
-                A modern full-stack application built with Deno 2, Fresh 1.7.3,
+                A modern full-stack application built with Deno 2, Fresh,
                 TypeScript, and Tailwind CSS
               </p>
               <div class="flex justify-center space-x-4 text-sm text-white/70">
                 <span>🦕 Deno 2</span>
-                <span>🍋 Fresh 1.7.3</span>
+                <span>🍋 Fresh</span>
                 <span>⚡ TypeScript</span>
                 <span>🎨 Tailwind CSS</span>
                 <span>🗄️ Deno KV</span>
-                <span>📡 Zod Validation</span>
+                <span>📡 Valibot Validation</span>
               </div>
             </div>
 

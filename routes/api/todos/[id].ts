@@ -1,4 +1,4 @@
-import { type Handlers } from "fresh";
+import { type Handlers } from "$fresh/server.ts";
 import * as v from "valibot";
 import { getDatabase } from "../../../lib/db.ts";
 import { UpdateTodoSchema } from "../../../lib/types.ts";

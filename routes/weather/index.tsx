@@ -1,5 +1,5 @@
-import { Head } from "fresh/runtime";
-import { type Handlers } from "fresh";
+import { Head } from "$fresh/runtime.ts";
+import { type Handlers } from "$fresh/server.ts";
 import WeatherApp from "../../islands/WeatherApp.tsx";
 
 export const handler: Handlers = {

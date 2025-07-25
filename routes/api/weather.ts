@@ -1,4 +1,4 @@
-import { type Handlers } from "fresh";
+import { type Handlers } from "$fresh/server.ts";
 import * as v from "valibot";
 import { WeatherQuerySchema } from "../../lib/types.ts";
 import {

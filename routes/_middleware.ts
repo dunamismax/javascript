@@ -1,4 +1,4 @@
-import { type MiddlewareHandlerContext } from "fresh";
+import { type MiddlewareHandlerContext } from "$fresh/server.ts";
 
 // Rate limiting middleware
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
