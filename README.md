@@ -28,14 +28,14 @@ A production-ready TypeScript application built with **Deno 2** and **Fresh**, f
 
 ## Core Features
 
-- **🍋 Fresh Framework**: Next-gen web framework with island architecture, Express-like API, and zero JS by default.
-- **🦕 Deno 2 Runtime**: Secure, modern TypeScript runtime with a built-in toolchain and npm compatibility.
-- **🏝️ Island Architecture**: Interactive Preact components are hydrated only where needed for optimal performance.
-- **🔒 Native TypeScript**: First-class TypeScript support with zero configuration and strict type safety.
-- **🗄️ Deno KV Database**: Built-in, zero-setup key-value database perfect for edge deployments.
-- **🎨 Modern UI Stack**: Tailwind CSS with Preact signals for reactive, performant interfaces.
-- **🚀 Real-World Examples**: Includes a Todo list with analytics and a weather dashboard to showcase Fresh capabilities.
-- **🔧 Single Binary Deployment**: Compile the entire application to a standalone executable with `deno compile`.
+- **Fresh Framework**: Next-gen web framework with island architecture, Express-like API, and zero JS by default.
+- **Deno 2 Runtime**: Secure, modern TypeScript runtime with a built-in toolchain and npm compatibility.
+- **Island Architecture**: Interactive Preact components are hydrated only where needed for optimal performance.
+- **Native TypeScript**: First-class TypeScript support with zero configuration and strict type safety.
+- **Deno KV Database**: Built-in, zero-setup key-value database perfect for edge deployments.
+- **Modern UI Stack**: Tailwind CSS with Preact signals for reactive, performant interfaces.
+- **Real-World Examples**: Includes a Todo list with analytics and a weather dashboard to showcase Fresh capabilities.
+- **Single Binary Deployment**: Compile the entire application to a standalone executable with `deno compile`.
 
 ## Project Structure
 
@@ -108,12 +108,12 @@ This project leverages the full power of the Deno ecosystem for a seamless devel
 
 ## Tech Stack
 
-- **Framework**: 🍋 Fresh
-- **Runtime**: 🦕 Deno 2
-- **UI**: 🏝️ Preact Islands & 🎨 Tailwind CSS
-- **Database**: 🗄️ Deno KV
-- **Packages**: 📦 JSR & 🔍 Valibot
-- **Tooling**: ⚙️ Deno Built-in (Format, Lint, Test, Bundle)
+- **Framework**: Fresh
+- **Runtime**: Deno 2
+- **UI**: Preact Islands & Tailwind CSS
+- **Database**: Deno KV
+- **Packages**: JSR & Valibot
+- **Tooling**: Deno Built-in (Format, Lint, Test, Bundle)
 
 ## Development Scripts
 
@@ -163,8 +163,8 @@ deno task compile
 
 This repository includes two example applications:
 
-- **📝 Todo List**: A full CRUD application with advanced filtering, real-time analytics, and priority management, all powered by Deno KV and Fresh islands.
-- **🌤️ Weather Dashboard**: A responsive dashboard using the OpenWeatherMap API, featuring local storage for preferences and beautiful data visualizations.
+- **Todo List**: A full CRUD application with advanced filtering, real-time analytics, and priority management, all powered by Deno KV and Fresh islands.
+- **Weather Dashboard**: A responsive dashboard using the OpenWeatherMap API, featuring local storage for preferences and beautiful data visualizations.
 
 ## License
 
