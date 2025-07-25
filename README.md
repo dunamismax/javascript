@@ -94,6 +94,10 @@ deno task start
 
 **That's it!** No npm install, no build step, no configuration. Deno handles everything.
 
+<p align="center">
+  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-fresh-logo.png" alt="Deno Toolbox" width="150" />
+</p>
+
 ## Why Citrus Press?
 
 Citrus Press is built on Fresh, a cutting-edge web framework that combines the best of server-side rendering with selective client-side interactivity through its revolutionary **island architecture**. Unlike traditional frameworks that ship large JavaScript bundles, Fresh ships **zero JavaScript by default**. This means instant page loads, excellent Core Web Vitals, and a superior user experience.
