@@ -38,7 +38,7 @@ A production-ready TypeScript application built with **Deno 2** and **Fresh**, f
 - **Single Binary Deployment**: Compile the entire application to a standalone executable with `deno compile`.
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/deno/jsr-dark.jpeg" alt="Deno Toolbox" width="200" />
+  <img src="https://github.com/dunamismax/images/blob/main/deno/jsr-dark.jpeg" alt="JSR Dark Fire Logo" width="200" />
 </p>
 
 ## Project Structure
@@ -99,7 +99,7 @@ deno task start
 **That's it!** No npm install, no build step, no configuration. Deno handles everything.
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-fresh-logo.png" alt="Deno Toolbox" width="150" />
+  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-fresh-logo.png" alt="Deno Fresh Logo" width="150" />
 </p>
 
 ## Why Citrus Press?
@@ -113,6 +113,10 @@ Citrus Press is built on Fresh, a cutting-edge web framework that combines the b
 | Hydration Overhead  | Full page       | Islands only        |
 
 This project leverages the full power of the Deno ecosystem for a seamless developer experience, from the built-in toolchain to the modern JSR package registry.
+
+<p align="center">
+  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-eating-ts.jpeg" alt="Deno Eating TS" width="200" />
+</p>
 
 ## Tech Stack
 
