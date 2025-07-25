@@ -17,10 +17,6 @@
   <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind-CSS-06B6D4.svg?logo=tailwindcss" alt="Tailwind CSS"></a>
   <a href="https://deno.com/kv"><img src="https://img.shields.io/badge/Deno_KV-Database-00ADD8.svg" alt="Deno KV"></a>
   <a href="https://jsr.io/"><img src="https://img.shields.io/badge/Registry-JSR-F7DF1E.svg" alt="JSR Registry"></a>
-  <a href="https://caddyserver.com/"><img src="https://img.shields.io/badge/Deploy-Caddy-1F88C0.svg" alt="Caddy"></a>
-  <a href="https://www.linux.org/"><img src="https://img.shields.io/badge/Platform-Linux-FCC624.svg?logo=linux" alt="Linux"></a>
-  <a href="https://systemd.io/"><img src="https://img.shields.io/badge/Process-systemd-000000.svg" alt="systemd"></a>
-  <a href="https://docs.github.com/en/actions"><img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF.svg?logo=github-actions" alt="GitHub Actions"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
 </p>
 
