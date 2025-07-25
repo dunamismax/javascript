@@ -1,261 +1,252 @@
-<p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/javascript/Vanilla-JS-Logo.png" alt="Full-Stack Vanilla JavaScript Monorepo" width="200" />
-</p>
+# Deno Fresh Application
 
-<p align="center">
-  <a href="https://github.com/dunamismax/javascript">
-    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&size=24&pause=1000&color=F7DF1E&center=true&vCenter=true&width=1000&lines=Full-Stack+Vanilla+JavaScript+Monorepo;flare-router+%2B+3.4kB+Lightning+Fast+SPA;Intelligent+Link+Prefetching+%2B+Zero+Config;Vanilla+HTML%2BCSS%2BJS+%2B+Node.js+%2B+Fastify;MongoDB+Native+Driver+%2B+VineJS+Validation;pnpm+Workspaces+%2B+esbuild+Bundling;Zero+Framework+Dependencies;Lightning+Fast+Performance;Production+Ready+%2B+Secure;Real-World+Applications;systemd+%2B+Caddy+%2B+HTTPS;Enterprise+Grade+Architecture;Maximum+Performance+Control;Modern+Development+Experience;Complete+Tech+Stack;4-Step+Development+Setup;Monorepo+Package+Architecture;Environment+Config+%2B+dotenv;GitHub+Actions+CI%2FCD+Pipeline;MIT+Licensed+Open+Source" alt="Typing SVG" />
-  </a>
-</p>
+A modern full-stack application built with **Deno 2** and **Fresh 1.7.3**,
+featuring a Todo List and Weather Dashboard with TypeScript, Tailwind CSS, and
+Deno KV.
 
-<p align="center">
-  <a href="#-flare-router---the-heart-of-lightning-fast-navigation"><img src="https://img.shields.io/badge/flare_router-3.4kB-FF6B35.svg" alt="flare-router"></a>
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-18+-339933.svg?logo=node.js" alt="Node.js Version"></a>
-  <a href="https://fastify.dev/"><img src="https://img.shields.io/badge/Fastify-4.29+-000000.svg?logo=fastify" alt="Fastify Version"></a>
-  <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-6.18+-47A248.svg?logo=mongodb" alt="MongoDB Version"></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/Vanilla_JS-ES2020+-F7DF1E.svg?logo=javascript" alt="Vanilla JavaScript"></a>
-  <a href="https://eslint.org/"><img src="https://img.shields.io/badge/Code_Quality-ESLint-4B32C3.svg?logo=eslint" alt="ESLint"></a>
-  <a href="https://prettier.io/"><img src="https://img.shields.io/badge/Code_Format-Prettier-F7B93E.svg?logo=prettier" alt="Prettier"></a>
-  <a href="https://pnpm.io/"><img src="https://img.shields.io/badge/Package_Manager-pnpm-F69220.svg?logo=pnpm" alt="pnpm"></a>
-  <a href="https://caddyserver.com/"><img src="https://img.shields.io/badge/Deploy-Caddy-1F88C0.svg" alt="Caddy"></a>
-  <a href="https://www.linux.org/"><img src="https://img.shields.io/badge/Platform-Linux-FCC624.svg?logo=linux" alt="Linux"></a>
-  <a href="https://systemd.io/"><img src="https://img.shields.io/badge/Process-systemd-000000.svg" alt="systemd"></a>
-  <a href="https://docs.github.com/en/actions"><img src="https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF.svg?logo=github-actions" alt="GitHub Actions"></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
-</p>
+## 🚀 Features
 
----
+### 📝 Todo List Application
 
-# Full-Stack Vanilla JavaScript Monorepo
+- **CRUD Operations** with Deno KV for persistent storage
+- **Task Management** with priorities (High, Medium, Low) and categories
+- **Advanced Filtering** by category, priority, and status
+- **Real-time Analytics** dashboard with completion statistics
+- **Responsive Design** with Tailwind CSS
 
-A production-ready JavaScript monorepo featuring **flare-router** - a blazingly fast 3.4kB SPA router with intelligent prefetching. Built with vanilla HTML, CSS, and JavaScript frontend, Node.js, Fastify, and MongoDB backend.
+### 🌤️ Weather Dashboard
 
-## Features
+- **Real-time Weather Data** from OpenWeatherMap API
+- **US ZIP Code Validation** with Zod schema validation
+- **Search History** stored in localStorage
+- **Rate Limiting** and comprehensive error handling
+- **Detailed Weather Metrics** including humidity, wind, pressure, and
+  visibility
 
-- **flare-router** - Lightning-fast 3.4kB router with intelligent prefetching and SPA-like navigation
-- **Zero-Config Performance** - Instant page transitions and state preservation
-- **Modern Full-Stack Architecture** with Fastify backend, MongoDB database, and VineJS validation
-- **Vanilla Frontend Experience** with HTML, CSS, JavaScript, and zero framework overhead
-- **Shared Utilities** including API client, DOM helpers, storage management, and CSS design system
-- **Real Applications** Todo list with analytics dashboard and weather app
-- **Development Tools** esbuild bundling, ESLint, Prettier, and pnpm workspaces
-- **Production Ready** systemd services, Caddy reverse proxy, and security best practices
+## 🛠️ Tech Stack
 
-## Project Structure
+- **[Deno 2](https://deno.land/)** - Secure, modern runtime for JavaScript and
+  TypeScript
+- **[Fresh 1.7.3](https://fresh.deno.dev/)** - Next-generation web framework
+  with island architecture
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
+  throughout
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Deno KV](https://deno.com/kv)** - Built-in key-value database with zero
+  setup
+- **[Zod](https://zod.dev/)** - TypeScript-first schema validation
+- **[Preact](https://preactjs.com/)** - Fast 3kB alternative to React
 
-```sh
-├── apps/
-│   ├── todo-list/             # Full-stack todo app with MongoDB
-│   └── weather/               # Weather dashboard with API integration
-├── packages/
-│   ├── flare-router/          # 🔥 3.4kB SPA router with intelligent prefetching
-│   ├── utils/                 # API client, DOM helpers, storage utilities
-│   ├── ui-components/         # CSS design system with dark/light themes
-│   └── config/                # Shared ESLint, Prettier configurations
-├── deployment/                # systemd services and Caddy configuration
-└── Configuration files        # ESLint, Prettier, pnpm workspaces
-```
+## 🏃‍♂️ Quick Start
 
----
+### Prerequisites
 
-<p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/javascript/JavaScript-logo.png" alt="JavaScript" width="100" />
-</p>
+- [Deno 2.0+](https://deno.land/manual/getting_started/installation)
+- [OpenWeatherMap API Key](https://openweathermap.org/api) (free)
 
-## Quick Start
+### Installation & Setup
 
-**Prerequisites:** [Node.js 18+](https://nodejs.org/) and [pnpm 8+](https://pnpm.io/)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/dunamismax/javascript.git
+   cd javascript
+   ```
 
-### Get Running in 4 Steps
+2. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your OpenWeatherMap API key
+   ```
 
-```bash
-# 1. Clone and install
-git clone https://github.com/dunamismax/javascript.git
-cd javascript && pnpm install
+3. **Start the development server**
+   ```bash
+   deno task start
+   ```
 
-# 2. Configure environment (add your MongoDB URI and OpenWeatherMap API key)
-cp apps/todo-list/.env.example apps/todo-list/.env
-cp apps/weather/.env.example apps/weather/.env
-# Edit .env files with your configuration
+4. **Open your browser**
+   - Main page: http://localhost:8000
+   - Todo List: http://localhost:8000/todos
+   - Weather App: http://localhost:8000/weather
 
-# 3. Build applications for production
-pnpm build
-
-# 4. Start development servers
-pnpm dev
-```
-
-**Access:** Todo List at `http://localhost:3001`, Weather Dashboard at `http://localhost:3000`
-
-## flare-router - Lightning-Fast Navigation
-
-flare-router is the custom-built 3.4kB router that powers both applications, transforming static websites into fast Single Page Applications with zero configuration.
-
-### Key Features
-
-- **Zero Configuration** - Works out of the box with any static site
-- **Lightning Fast** - Only 3.4kB gzipped
-- **Intelligent Prefetching** - Uses IntersectionObserver to prefetch visible links automatically
-- **State Preservation** - JavaScript state persists between page navigations
-- **SPA Experience** - Instant page transitions without full reloads
-- **Framework Agnostic** - Drop-in solution for any website architecture
-
-### Performance Comparison
-
-| Metric           | Traditional MPA    | flare-router Enhanced |
-| ---------------- | ------------------ | --------------------- |
-| Page Load Time   | 500-2000ms         | 50-200ms              |
-| Navigation Speed | Full reload        | Instant               |
-| JavaScript State | Lost on navigation | Preserved             |
-| Bundle Size      | N/A                | 3.4kB                 |
-
-## Tech Stack
-
-**flare-router:** 3.4kB zero-config SPA router with intelligent prefetching
-**Core:** Node.js 18+, Vanilla JavaScript ES Modules, Fastify, MongoDB Native Driver
-**Frontend:** Vanilla HTML, CSS with design system, JavaScript DOM manipulation
-**Shared:** VineJS validation, API client utilities, storage management
-**Tools:** esbuild bundling, ESLint, Prettier, pnpm workspaces
-**Deployment:** Linux, systemd process management, Caddy reverse proxy with automatic HTTPS
-
-## Architecture
-
-**Monorepo Structure:** pnpm workspaces with shared packages and independent applications
-
-- **`@dunamismax/flare-router`** - 3.4kB router with intelligent prefetching and SPA-like navigation
-- **`@dunamismax/utils`** - API client, DOM helpers, storage utilities
-- **`@dunamismax/ui-components`** - CSS design system with dark/light themes
-- **`@dunamismax/config`** - Shared ESLint, Prettier configurations
-- **Todo List App** - Full CRUD operations with MongoDB, VineJS validation, analytics dashboard
-- **Weather App** - OpenWeatherMap integration with server-side API proxy, ZIP code support
-
-## Development Scripts
+## 📖 Available Commands
 
 ```bash
 # Development
-pnpm dev               # Start all applications in development mode
-pnpm dev:todo         # Start only todo-list application
-pnpm dev:weather      # Start only weather application
-
-# Building
-pnpm build            # Build all applications for production
-pnpm build:dev        # Build with sourcemaps for debugging
-pnpm clean            # Clean all built assets
+deno task start          # Start development server with hot reload
+deno task build          # Build for production
+deno task preview        # Preview production build
 
 # Code Quality
-pnpm lint             # Lint all JavaScript files with ESLint
-pnpm lint:fix         # Auto-fix linting issues
-pnpm format           # Format code with Prettier
-pnpm format:check     # Check code formatting
+deno task check          # Run formatter, linter, and type checking
+deno fmt                 # Format code
+deno lint                # Lint code
+deno check **/*.ts       # Type check
 
-# Production
-pnpm start            # Start all applications in production mode
+# Fresh specific
+deno task manifest       # Update route manifest
+deno task update         # Update Fresh to latest version
 ```
 
----
+## 🏗️ Project Structure
 
-<p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/javascript/js-evolution-wallpaper.jpg" alt="JavaScript Evolution" width="450" />
-</p>
-
-## Key Features
-
-**High Performance:** Fastify backend, MongoDB native driver, esbuild bundling, vanilla frontend with zero framework overhead
-
-**Security:** VineJS validation with detailed error messages, input sanitization and XSS protection, rate limiting, centralized error handling
-
-**Modern Development:** Hot reload with nodemon, source maps for debugging, ESLint + Prettier integration, monorepo benefits with shared utilities
-
-**Production Deployment:** systemd services with auto-restart, Caddy reverse proxy with automatic HTTPS, asset optimization with intelligent caching
-
-## Environment Setup
-
-**Todo List Application** (`.env`):
-
-```bash
-MONGODB_URI=mongodb://localhost:27017/todos
-PORT=3001
-NODE_ENV=production
+```
+javascript/
+├── lib/                    # Shared utilities and types
+│   ├── types.ts           # TypeScript interfaces and Zod schemas
+│   ├── db.ts              # Deno KV database layer
+│   └── utils.ts           # Utility functions and helpers
+├── routes/                # Fresh file-based routing
+│   ├── index.tsx          # Home page
+│   ├── todos/             # Todo list routes
+│   │   └── index.tsx      # Todo list page
+│   ├── weather/           # Weather app routes
+│   │   └── index.tsx      # Weather app page
+│   └── api/               # API endpoints
+│       ├── todos/         # Todo CRUD operations
+│       └── weather.ts     # Weather data fetching
+├── islands/               # Interactive client-side components
+│   ├── TodoApp.tsx        # Todo list application
+│   └── WeatherApp.tsx     # Weather dashboard
+├── components/            # Reusable server-side components
+├── static/               # Static assets
+├── deno.json             # Deno configuration and dependencies
+├── fresh.config.ts       # Fresh framework configuration
+├── tailwind.config.ts    # Tailwind CSS configuration
+└── .env.example          # Environment variables template
 ```
 
-**Weather Application** (`.env`):
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file with the following variables:
 
 ```bash
+# Required: OpenWeatherMap API key
 OPENWEATHERMAP_API_KEY=your_api_key_here
-PORT=3000
-NODE_ENV=production
+
+# Optional: Server port (default: 8000)
+PORT=8000
+
+# Optional: Environment mode
+DENO_ENV=development
 ```
 
-**Note:** Weather app now uses US ZIP codes only for enhanced validation and security.
+### Deno KV Database
 
-## Production Deployment
+The todo list uses Deno KV for persistent storage. No additional setup
+required - the database file is created automatically when you first run the
+application.
 
-**Quick Deploy:**
+## 🌐 API Endpoints
 
-```bash
-pnpm build    # Build applications for production
-pnpm start    # Start in production mode
-```
+### Todo List API
 
-**Self-Hosting:** Use systemd services and Caddy reverse proxy for production deployment on Linux servers. Complete configurations included for process management, automatic HTTPS, and security headers.
+- `GET /api/todos` - Get all todos (with filtering)
+- `POST /api/todos` - Create a new todo
+- `GET /api/todos/:id` - Get a specific todo
+- `PUT /api/todos/:id` - Update a todo
+- `DELETE /api/todos/:id` - Delete a todo
+- `GET /api/todos/analytics` - Get todo analytics
 
-## Applications
+### Weather API
 
-**Todo List Application:**
+- `GET /api/weather?zipCode=12345` - Get weather data for a ZIP code
 
-- Full CRUD operations with MongoDB backend and VineJS validation
-- Advanced filtering by category, priority, and completion status
-- Real-time analytics dashboard with statistics and charts
-- Priority management (High, Medium, Low) with visual indicators
-- Category organization (Work, Personal, Shopping, Health, General)
-- Rate limiting and centralized error handling
+## 🔒 Security Features
 
-**Weather Dashboard:**
+- **Rate Limiting** on all API endpoints
+- **Input Validation** with Zod schemas
+- **XSS Protection** with HTML escaping
+- **Environment Variable Validation** with runtime checks
+- **Error Handling** with sanitized error messages
 
-- OpenWeatherMap API integration with server-side proxy for security
-- US ZIP code validation for enhanced security
-- Responsive design optimized for mobile and desktop
-- Comprehensive weather data including humidity, wind, pressure, visibility
-- Rate limiting and centralized error handling
-- Intelligent prefetching with flare-router
+## 🚀 Deployment
 
-## Contributing
+### Deno Deploy (Recommended)
 
-1. Fork and create feature branch
-2. Make changes following existing patterns and architecture
-3. Run `pnpm lint && pnpm format && pnpm build`
-4. Test changes in both development and production modes
-5. Submit pull request with clear description
+1. **Push to GitHub** (if not already done)
+2. **Connect to Deno Deploy**
+   - Go to [dash.deno.com](https://dash.deno.com)
+   - Create new project from GitHub repository
+   - Set environment variables in dashboard
+3. **Deploy automatically** on every push to main branch
 
-**Code Style:** Uses ESLint and Prettier with shared configurations from `@dunamismax/config`
+### Self-Hosting
 
-## License
+1. **Build the application**
+   ```bash
+   deno task build
+   ```
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+2. **Run in production mode**
+   ```bash
+   deno task preview
+   ```
+
+3. **Use a process manager** (recommended)
+   ```bash
+   # Example with systemd or PM2
+   # Configure reverse proxy (Nginx/Caddy) for HTTPS
+   ```
+
+## 🧪 Development
+
+### Adding New Features
+
+1. **Create route files** in `routes/` directory
+2. **Add API endpoints** in `routes/api/` directory
+3. **Create interactive components** as islands in `islands/`
+4. **Add types** to `lib/types.ts`
+5. **Update database schema** if needed in `lib/db.ts`
+
+### Code Style
+
+- **TypeScript everywhere** - No JavaScript files
+- **Functional components** with Preact
+- **Tailwind CSS** for styling
+- **Zod schemas** for validation
+- **Error handling** at all levels
+
+## 📝 Migration Notes
+
+This application was converted from a Node.js + Vanilla JavaScript monorepo to
+Deno 2 + Fresh + TypeScript:
+
+### What Changed
+
+- ✅ **Runtime**: Node.js → Deno 2
+- ✅ **Framework**: Custom router → Fresh 1.7.3
+- ✅ **Language**: JavaScript → TypeScript
+- ✅ **Database**: MongoDB → Deno KV
+- ✅ **Validation**: VineJS → Zod
+- ✅ **Bundling**: esbuild → Fresh built-in
+- ✅ **CSS**: Custom CSS → Tailwind CSS
+- ✅ **Package Manager**: pnpm → Deno native
+
+### What's Improved
+
+- 🚀 **Zero configuration** setup
+- 🔒 **Built-in security** features
+- ⚡ **Island architecture** for optimal performance
+- 🎯 **Type safety** throughout the application
+- 🌐 **Web standard APIs** everywhere
+- 📦 **Single executable** deployment option
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE)
+file for details.
+
+## 👨‍💻 Original Author
+
+- **dunamismax** - [GitHub](https://github.com/dunamismax) |
+  [Email](mailto:dunamismax@tutamail.com)
+- Enhanced and converted to modern Deno 2 + Fresh tech stack
 
 ---
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com/dunamismax">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://twitter.com/dunamismax" target="_blank"><img src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter"></a>
-  <a href="https://bsky.app/profile/dunamismax.bsky.social" target="_blank"><img src="https://img.shields.io/badge/Bluesky-blue?style=for-the-badge&logo=bluesky&logoColor=white" alt="Bluesky"></a>
-  <a href="https://reddit.com/user/dunamismax" target="_blank"><img src="https://img.shields.io/badge/Reddit-%23FF4500.svg?&style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit"></a>
-  <a href="https://discord.com/users/dunamismax" target="_blank"><img src="https://img.shields.io/badge/Discord-dunamismax-7289DA.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://signal.me/#p/+dunamismax.66" target="_blank"><img src="https://img.shields.io/badge/Signal-dunamismax.66-3A76F0.svg?style=for-the-badge&logo=signal&logoColor=white" alt="Signal"></a>
-</p>
-
----
-
-<p align="center">
-  <strong>Full-Stack Vanilla JavaScript Monorepo with flare-router</strong><br>
-  <sub>🔥 flare-router 3.4kB Router • Vanilla JS • Node.js • Fastify • MongoDB • Lightning-Fast SPA Navigation</sub>
-</p>
-
-<p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/javascript/js-coffee-particles.jpg" alt="JavaScript Coffee" width="450" />
+  <strong>Built with Deno 2 🦕 Fresh 1.7.3 🍋 TypeScript ⚡</strong><br>
+  <sub>Modern • Fast • Secure • Type-Safe</sub>
 </p>

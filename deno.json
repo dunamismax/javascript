@@ -1,0 +1,48 @@
+{
+  "lock": false,
+  "tasks": {
+    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+    "dev": "deno run -A --watch=static/,routes/ dev.ts",
+    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "build": "deno run -A dev.ts build",
+    "preview": "deno run -A main.ts",
+    "update": "deno run -A -r jsr:@fresh/update ."
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    }
+  },
+  "exclude": [
+    "**/_fresh/*"
+  ],
+  "imports": {
+    "fresh": "jsr:@fresh/core@2.0.0-alpha.34",
+    "fresh/": "jsr:@fresh/core@2.0.0-alpha.34/",
+    "fresh/dev": "jsr:@fresh/core@2.0.0-alpha.34/dev",
+    "fresh/runtime": "jsr:@fresh/core@2.0.0-alpha.34/runtime",
+    "preact": "npm:preact@10.25.0",
+    "preact/": "npm:preact@10.25.0/",
+    "preact/jsx-runtime": "npm:preact@10.25.0/jsx-runtime",
+    "preact/hooks": "npm:preact@10.25.0/hooks",
+    "@preact/signals": "npm:@preact/signals@1.2.2",
+    "@preact/signals-core": "npm:@preact/signals-core@1.5.1",
+    "tailwindcss": "npm:tailwindcss@3.4.1",
+    "tailwindcss/": "npm:tailwindcss@3.4.1/",
+    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js",
+    "@std/": "jsr:@std/assert@^1.0.0/",
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.0",
+    "valibot": "jsr:@valibot/valibot@^1.1.0"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "strict": true,
+    "noImplicitAny": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "nodeModulesDir": "auto"
+}
