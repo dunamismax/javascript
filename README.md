@@ -37,6 +37,10 @@ A production-ready TypeScript application built with **Deno 2** and **Fresh**, f
 - **Real-World Examples**: Includes a Todo list with analytics and a weather dashboard to showcase Fresh capabilities.
 - **Single Binary Deployment**: Compile the entire application to a standalone executable with `deno compile`.
 
+<p align="center">
+  <img src="https://github.com/dunamismax/images/blob/main/deno/jsr-dark.jpeg" alt="Deno Toolbox" width="200" />
+</p>
+
 ## Project Structure
 
 ```sh
