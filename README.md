@@ -166,13 +166,6 @@ This repository includes two example applications:
 - **📝 Todo List**: A full CRUD application with advanced filtering, real-time analytics, and priority management, all powered by Deno KV and Fresh islands.
 - **🌤️ Weather Dashboard**: A responsive dashboard using the OpenWeatherMap API, featuring local storage for preferences and beautiful data visualizations.
 
-## Author
-
-<img src="https://gravatar.com/nachounabashed3164d5c433" alt="dunamismax" width="80" style="border-radius: 50%;" />
-
-**dunamismax** - Creator and maintainer of Citrus Press and advocate for modern
-web development with Deno and Fresh.
-
 ## License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE)
