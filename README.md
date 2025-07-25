@@ -69,7 +69,7 @@ A production-ready TypeScript application built with **Deno 2** and **Fresh**, f
 ---
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-toolbox.jpeg" alt="Deno Toolbox" width="200" />
+  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-space.jpeg" alt="Deno SpaceMan" width="200" />
 </p>
 
 ## Quick Start
@@ -144,7 +144,7 @@ deno task check
 ```
 
 <p align="center">
-  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-mage.jpeg" alt="Deno Mage" width="200" />
+  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-toolbox.jpeg" alt="Deno Toolbox" width="200" />
 </p>
 
 ## Environment & Deployment
@@ -170,6 +170,10 @@ deno task compile
 # Run the deployed application
 ./bin/citrus-press
 ```
+
+<p align="center">
+  <img src="https://github.com/dunamismax/images/blob/main/deno/deno-mage.jpeg" alt="Deno Mage" width="200" />
+</p>
 
 ## Applications
 
